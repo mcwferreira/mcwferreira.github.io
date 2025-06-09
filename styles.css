@@ -865,3 +865,9 @@ ul, ol, li {
   color: var(--gray2);
   font-family: var(--body-font);
 }
+
+.cs-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
