@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:300&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Domine:wght@400..700&family=Manrope:wght@200..800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400..700&family=Montserrat:wght@300;400&display=swap');
 
 :root {
   --site-pad: 2rem;
@@ -15,16 +16,6 @@
 
   --display-font: "Manrope", sans-serif;
   --body-font: "Montserrat", sans-serif; 
-}
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400..700&family=Montserrat:wght@300;400&display=swap');
-
-:root {
-  --green: #128280;
-  --blue: #396BB8;
-  --yellow: #E2B632;
-  --gray: #333;
-  --lightgray: #747474;
-  --max-width: 1100px;
 }
 
 body {
@@ -723,19 +714,18 @@ ul, ol, li {
   width: 100%;
   height: 300px;
   border-radius: 30px;
-  border: 1px solid var(--gray1);
   background-color: white;
-  transition: all 0.3s ease;
   overflow: hidden;
   box-sizing: border-box;
+  margin-top: 40px;
 }
 
-.cs:hover {
-  background-color: rgba(105, 104, 143, 0.1); /* GB color at 10% opacity */
-  border-color: var(--smoke);
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-}
+/* Unique background colors */
+.cs-1{ background-color: #F0FAFE; }
+.cs-2{ background-color: #FFFAEA; }
+.cs-3{ background-color: #EFFAEF; }
 
+/* IMAGE SECTION */
 .cs-image {
   flex: 1;
   display: flex;
@@ -753,12 +743,11 @@ ul, ol, li {
   transition: transform 0.4s ease;
 }
 
-.cs:hover .cs-image img {
-  transform: scale(1.05); /* smaller than before */
-  margin-top: 0;
-  margin-bottom: 0;
+.cs-image:hover img {
+  transform: scale(1.05);
 }
 
+/* INFO SECTION */
 .cs-info {
   flex: 1;
   padding: 24px 24px 24px 0;
@@ -767,6 +756,12 @@ ul, ol, li {
   justify-content: center;
   gap: 16px;
   box-sizing: border-box;
+}
+
+.cs-text {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .cs-title {
@@ -778,43 +773,58 @@ ul, ol, li {
   margin: 0;
 }
 
-.cs-subtext {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  color: #69688F;
-  line-height: 22px;
-  margin: 0;
-}
-
+.cs-subtext,
 .cs-description {
   font-family: 'Montserrat', sans-serif;
   font-size: 16px;
   font-weight: 400;
-  color: #0F0F0F;
   line-height: 22px;
   margin: 0;
 }
 
-.cs-button {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 20px;
-  line-height: 24px;
-  font-weight: 400;
-  padding: 8px 16px;
-  border: 2px solid #69688F;
-  background: none;
-  color: #69688F;
-  border-radius: 24px;
-  cursor: pointer;
-  width: fit-content;
-  height: 40px;
-  transition: all 0.3s ease;
+.cs-subtext { color: #69688F; }
+.cs-description { color: #0F0F0F; }
+
+.cs-button-wrapper {
+  display: flex;
+  flex-direction: row;
 }
 
-.cs:hover .cs-button {
-  background-color: #69688F;
-  color: white;
+.button {
+  --border-top-width: 2px;
+  --border-right-width: 4px;
+  --border-bottom-width: 4px;
+  --border-left-width: 2px;
+  --border-color: #2d2b2a;
+  --border-style: solid;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  gap: 6px;
+  padding: 12px 24px;
+  background-color: white;
+  border-radius: 100px;
+  width: min-content;
+  height: min-content;
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  
+  border-top: var(--border-top-width) var(--border-style) var(--border-color);
+  border-right: var(--border-right-width) var(--border-style) var(--border-color);
+  border-bottom: var(--border-bottom-width) var(--border-style) var(--border-color);
+  border-left: var(--border-left-width) var(--border-style) var(--border-color);
+
+  transition: background-color 0.3s ease, color 0.3s ease;
+  color: #2d2b2a;
+}
+
+.button:hover {
+  background-color: var(--gray1);
+  color: var(--gray3);
 }
 
 .projects.container {

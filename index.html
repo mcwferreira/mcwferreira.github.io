@@ -6,22 +6,17 @@
   <title>Marcus Ferreira</title>
   <link rel="stylesheet" href="styles.css"/>
 </head>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Marcus Ferreira</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
+
 <body>
-  <nav class="top-nav">
+    <nav class="top-nav" id="topNav">
     <div class="container nav-content">
       <a href="#" class="logo">Marcus Ferreira</a>
-      <div class="nav-links">
+      <button class="hamburger" id="hamburger">&#9776;</button>
+      <div class="nav-links" id="navLinks">
+        <a href="#">Home</a>
         <a href="#">About</a>
-        <a href="#">Resume</a>
-        <a href="#">LinkedIn</a>
+        <a href="MF/Marcus_ferreira_resume.pdf" target="_blank">Resume</a>
+        <a href="https://www.linkedin.com/in/marcuscferreira" target="_blank">LinkedIn</a>
       </div>
     </div>
   </nav>
@@ -35,50 +30,59 @@
         is all in the layout.</p>
     </div>
     <div class="profile-img-container">
-      <img class="profile-img" src="MF/Me.png" alt="Profile" />
+      <img class="profile-img" src="C:\Users\mferreira\Desktop\Portfolio\MF\ME.PNG" alt="Profile" />
     </div>
     </header>
   
-  <section class="projects container">
-    <a href="casestudies\tcp.html" class="cs-link">
-      <div class="cs">
-        <div class="cs-image">
-          <img src="C:/Users/mferreira/Desktop/Portfolio/CS-TCP/TCPPreview.png" alt="Connected Parent" />
+  <section class="projects container"> 
+    <div class="cs cs-1">
+      <div class="cs-image">
+        <a href="mcwferreira.github.io\tcp.html"><img src="mcwferreira.github.io\images\TCP\TCPThumbnail.png" alt="NYLI Thumbnail" /></a>
+      </div>
+      <div class="cs-info">
+        <div class="cs-text">
+          <h2 class="cs-title">New York Life Investments</h2>
+          <p class="cs-subtext">Financial Services | CMS | Enterprise</p>
+          <p class="cs-description">  Financial enterprise platform using AEM and a shared design system.</p>
         </div>
-        <div class="cs-info">
+        <div class="cs-button-wrapper">
+          <a href="mcwferreira.github.io\tcp.html" class="button">See Case Study</a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="cs cs-2">
+      <div class="cs-image">
+        <a href="mcwferreira.github.io\nyli.html"><img src="mcwferreira.github.io\images\TCP\TCPThumbnail.png" alt="Connected Parent Thumbnail" /></a>
+      </div>
+      <div class="cs-info">
+        <div class="cs-text">
           <h2 class="cs-title">The Connected Parent</h2>
           <p class="cs-subtext">SaaS | Branding | Creative</p>
           <p class="cs-description">Web Application built to help families find and rate disability resources near them</p>
-          <button class="cs-button">View Case Study</button>
+        </div>
+        <div class="cs-button-wrapper">
+          <a href="mcwferreira.github.io\nyli.html" class="button">See Case Study</a>
         </div>
       </div>
-    </a>
-  
-    <div class="cs">
-      <div class="cs-image">
-        <img src="C:/Users/mferreira/Desktop/Portfolio/CS-TCP/TCPPreview.png" alt="Connected Parent" />
-      </div>
-      <div class="cs-info">
-        <h2 class="cs-title">Uspire</h2>
-        <p class="cs-subtext">C2C | Product | Design</p>
-        <p class="cs-description">Mobile application that directly links students with study abroad advisors and helps them prepare for tests</p>
-        <button class="cs-button">View Case Study</button>
-      </div>
     </div>
-  
-    <div class="cs">
+
+    <div class="cs cs-3">
       <div class="cs-image">
-        <img src="C:/Users/mferreira/Desktop/Portfolio/CS-TCP/TCPPreview.png" alt="Connected Parent" />
+        <a href="mcwferreira.github.io\uspire.html"><img src="mcwferreira.github.io\images\Uspire\UspireThumbnail.png" alt="Uspire UspireThumbnail" /></a>
       </div>
       <div class="cs-info">
-        <h2 class="cs-title">LinkHut</h2>
-        <p class="cs-subtext">B2C | Product | Design</p>
-        <p class="cs-description">Social bookmarking application</p>
-        <button class="cs-button">View Case Study</button>
+        <div class="cs-text">
+          <h2 class="cs-title">Uspire</h2>
+          <p class="cs-subtext">C2C | Product | Design</p>
+          <p class="cs-description">Mobile application that directly links students with study abroad advisors and helps them prepare for tests</p>
+        </div>
+        <div class="cs-button-wrapper">
+          <a href="mcwferreira.github.io\uspire.html" class="button">See Case Study</a>
+        </div>
       </div>
     </div>
   </section>
-
 </body>
 
 <footer class="site-footer">

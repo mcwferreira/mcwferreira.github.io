@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Marcus Ferreira</title>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+
+<body>
+  <nav class="top-nav" id="topNav">
+    <div class="top-nav-content">
+      <a href="#" class="logo">Marcus Ferreira</a>
+      <button class="hamburger" id="hamburger">&#9776;</button>
+      <div class="nav-links" id="navLinks">
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <a href="MF/Marcus_ferreira_resume.pdf" target="_blank">Resume</a>
+        <a href="https://www.linkedin.com/in/marcuscferreira" target="_blank">LinkedIn</a>
+      </div>
+    </div>
+  </nav>
+
+  <header>
+    <div class="container">
+      <h1>NYL Investments Website Enhancements</h1>
+      <div class="category-pills">
+        <span class="pill">Enterprise</span>
+        <span class="bullet"></span>
+        <span class="pill">Financial Services</span>
+        <span class="bullet"></span>
+        <span class="pill">UX/UI</span>
+        <span class="bullet"></span>
+        <span class="pill">Design Systems</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="hero">
+    <div class="container">
+      <div class="brief">
+        <div>
+          <h2>I helped streamline and modernize the New York Life Investments website by designing and implementing scalable UX/UI enhancements across the enterprise platform using AEM and a shared design system.</h2>
+        </div>
+        <div class="info">
+          <div><div class="title">PROJECT DURATION</div><div class="text">Ongoing (2023–2024)</div></div>
+          <div><div class="title">ROLE</div><div class="text">UX/UI Designer</div></div>
+          <div><div class="title">TOOLS</div><div class="text">Figma, AEM, Jira</div></div>
+          <div><div class="title">SKILLS</div><div class="text">Design Systems, Prototyping, AEM Implementation, Responsive Design</div></div>
+        </div>
+      </div>
+      <img src="images/nyl-hero-placeholder.png" alt="NYL Website Screenshot" class="responsive-img">
+    </div>
+  </div>
+
+  <div class="page-layout">
+    <nav class="anchor-bar" id="sideMenu">
+      <ul>
+        <li><a href="#overview" class="nav-link">Overview</a></li>
+        <li><a href="#goals" class="nav-link">Goals</a></li>
+        <li><a href="#solutions" class="nav-link">Solutions</a></li>
+        <li><a href="#process" class="nav-link">Process</a></li>
+        <li><a href="#outcomes" class="nav-link">Outcomes</a></li>
+      </ul>
+    </nav>
+
+    <main class="main-content">
+      <div id="overview" class="text-section-container">
+        <div class="text-section-title">Overview</div>
+        <p>New York Life Investments needed to improve the usability, consistency, and scalability of their website — a large ecosystem with dozens of live pages maintained by multiple teams. I led UX/UI enhancements across key areas, including interactive tools, contact forms, layout templates, and documentation within the shared design system.</p>
+      </div>
+
+      <div id="goals" class="text-section-container">
+        <div class="text-section-title">Goals</div>
+        <ul>
+          <li>Create reusable, accessible components within the design system</li>
+          <li>Update key page templates for consistency and responsiveness</li>
+          <li>Improve user experience for forms, calculators, and content layouts</li>
+          <li>Support implementation using AEM modules and QA updates</li>
+        </ul>
+      </div>
+
+      <div id="solutions" class="text-section-container">
+        <div class="text-section-title">Key UX/UI Enhancements</div>
+        <div class="two-column">
+          <div>
+            <h3>Contact Form Overhaul</h3>
+            <ul>
+              <li>Improved layout and spacing for clarity</li>
+              <li>Added confirmation states and validation messages</li>
+              <li>Optimized for accessibility (labels, focus states)</li>
+            </ul>
+            <img src="images/form-before-after-placeholder.png" alt="Form redesign before and after" class="responsive-img">
+          </div>
+          <div>
+            <h3>Interactive Calculator</h3>
+            <ul>
+              <li>Designed user flow and UI for calculator tool</li>
+              <li>Built inputs, sliders, and dynamic result states</li>
+              <li>Collaborated with dev team for QA in AEM</li>
+            </ul>
+            <img src="images/calculator-placeholder.png" alt="Calculator UI screenshot" class="responsive-img">
+          </div>
+        </div>
+        <h3>Page Template & Design System Updates</h3>
+        <p>Revised layouts for hero sections, content blocks, and CTAs using grid-based designs and system tokens. Documented new variants of buttons, cards, and other modules to support faster rollout by marketing teams.</p>
+        <img src="images/design-system-placeholder.png" alt="Design system components" class="responsive-img">
+      </div>
+
+      <div id="process" class="text-section-container">
+        <div class="text-section-title">Process</div>
+        <p>I followed an agile workflow: gathering requests, prototyping improvements, testing updates in staging, and collaborating directly with developers and content authors in AEM. Documentation ensured consistency across all modules and implementations.</p>
+        <img src="images/process-kanban-placeholder.png" alt="Agile workflow kanban board" class="responsive-img">
+      </div>
+
+      <div id="outcomes" class="text-section-container">
+        <div class="text-section-title">Outcomes</div>
+        <ul>
+          <li>Enhanced user experience across multiple high-traffic pages</li>
+          <li>Reduced implementation time for new pages via reusable components</li>
+          <li>Improved site accessibility and visual consistency</li>
+          <li>Extended internal design system documentation and usage</li>
+        </ul>
+        <img src="images/before-after-pages-placeholder.png" alt="Before and after page screenshots" class="responsive-img">
+      </div>
+    </main>
+  </div>
+
+  <footer>
+    <p style="color: var(--gray2); text-align: center; margin-top: 40px;">&copy; 2025 Made by Marcus Ferreira</p>
+  </footer>
+
+  <script>
+    window.scrollTo(0, 0);
+
+    const sideMenu = document.getElementById("sideMenu");
+    const triggerSection = document.querySelector(".text-section-container");
+    const titles = document.querySelectorAll(".text-section-title");
+    const navLinks = document.querySelectorAll(".nav-link");
+    const topNav = document.getElementById("topNav");
+    const hamburger = document.getElementById("hamburger");
+    const mobileNavLinks = document.getElementById("navLinks");
+
+    hamburger.addEventListener("click", () => {
+      mobileNavLinks.classList.toggle("show");
+    });
+
+    window.addEventListener("scroll", () => {
+      const top = window.scrollY;
+
+      if (top > 10) {
+        topNav.classList.add("scrolled");
+      } else {
+        topNav.classList.remove("scrolled");
+      }
+
+      if (top > triggerSection.offsetTop - window.innerHeight / 2) {
+        sideMenu.style.display = "block";
+      } else {
+        sideMenu.style.display = "none";
+      }
+
+      titles.forEach(title => {
+        const rect = title.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 100) {
+          title.classList.add("visible");
+        }
+      });
+
+      navLinks.forEach(link => {
+        const section = document.querySelector(link.getAttribute("href"));
+        if (
+          section &&
+          top >= section.offsetTop - 140 &&
+          top < section.offsetTop + section.offsetHeight - 140
+        ) {
+          link.classList.add("active");
+        } else {
+          link.classList.remove("active");
+        }
+      });
+    });
+  </script>
+</body>
+</html>
