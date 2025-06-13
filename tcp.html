@@ -8,8 +8,8 @@
 </head>
 
 <body>
-    <nav class="top-nav" id="topNav">
-    <div class="top-nav-content">
+  <nav class="top-nav" id="topNav">
+    <div class="container nav-content">
       <a href="#" class="logo">Marcus Ferreira</a>
       <button class="hamburger" id="hamburger">&#9776;</button>
       <div class="nav-links" id="navLinks">
@@ -20,64 +20,51 @@
       </div>
     </div>
   </nav>
-
-  
-  <header>
-    <div class="container">
+<header>
+  <div class="brief">
+    <div class="container column">
       <h1>The Connected Parent</h1>
-      <div class="category-pills">
-        <span class="pill">Health/EdTech</span>
-        <span class="bullet"></span>
-        <span class="pill">C2C SaaS</span>
-        <span class="bullet"></span>
-        <span class="pill">Startup</span>
-        <span class="bullet"></span>
-        <span class="pill">Responsive</span>
-        <span class="bullet"></span>
-        <span class="pill">Branding</span>
-      </div>
+    <div class="category-pills">
+      <span>Health/EdTech</span>
+      <span class="bullet"></span>
+      <span>C2C SaaS</span>
+      <span class="bullet"></span>
+      <span>Startup</span>
+      <span class="bullet"></span>
+      <span>Responsive</span>
+      <span class="bullet"></span>
+      <span>Branding</span>
     </div>
-  </header>
-
-  <!-- Hero Section -->
-  <div class="hero">
-    <div class="container">
-      <div class="brief">
-        <div>
-          <h2>The Connected Parent (TCP) is an online SaaS platform that helps 
-            families connect with the disability, autism, and mental health 
-            resources they need. The searchable directory allows families to 
-            easily filter results based on their child's particular needs to 
-            find a wide range of services.
-          </h2>
-          <button class="pbutton">View Prototype</button>
-        </div>
-        <div class="info">
+      <h2>The Connected Parent (TCP) is an online SaaS platform that helps 
+        families connect with the disability, autism, and mental health 
+        resources they need. The searchable directory allows families to 
+        easily filter results based on their child's particular needs to 
+        find a wide range of services.</h2>
+      <a href="#design" class="button">See Prototype</a>
+    </div>
+      <div class="info cs-1">
           <div>
-            <div class="title">PROJECT DURATION</div>
+            <h3>PROJECT DURATION</h3>
             <div class="text">9 months</div>
           </div>
           <div>
-            <div class="title">ROLE</div>
+            <h3>ROLE</h3>
             <div class="text">Lead Product Designer</div>
           </div>
           <div>
-            <div class="title">TOOLS</div>
+            <h3>TOOLS</h3>
             <div class="text">Figma, Illustrator, Procreate</div>
           </div>
           <div>
-            <div class="title">SKILLS</div>
+            <h3>SKILLS</h3>
             <div class="text">User Research, Task Flows, Prototyping, Usability Testing, Interaction Design</div>
           </div>
-        </div>
       </div>
-      <img src="CS-TCP/TCPPreview.png" alt="Preview Image" class="responsive-img">
-    </div>
   </div>
-  <!-- Layout below hero -->
+  </header>
+      
   <div class="page-layout">
-    <!-- Anchor Bar -->
-    <nav class="anchor-bar" id="sideMenu">
+       <nav class="anchor-bar" id="sideMenu">
       <ul>
         <li><a href="#overview" class="nav-link">Overview</a></li>
         <li><a href="#research" class="nav-link">Research</a></li>
@@ -87,8 +74,9 @@
       </ul>
     </nav>
 
+    
+
     <main class="main-content">
-      <!-- OVERVIEW SECTION -->
       <div id="overview" class="text-section-container">
         <div class="text-section-title">Overview</div></div>
         <div class="text-section-container two-column">
@@ -135,8 +123,7 @@
         </p>
       </div>
 
-      <!-- STATS -->
-      <div class="text-section-container">
+      <div class="image">
         <div class="stats-container">
           <div class="stat-group">
             <div class="stat">71.4%</div>
@@ -169,8 +156,8 @@
             </p>
         </div>
         <div>
-            <h3> </h3>
-            <br><br><p>Issues identified during the evaluation:</p>
+           <h3> </h3>
+           <p>Issues identified during the evaluation:</p>
             <ul>
                <li> Does not meet WCAG accessibility guidelines in color choices</li>
                 <li>Unintuitive and confusing user interface</li>
@@ -180,31 +167,41 @@
                 <li>Complications in writing reviews for businesses</li>
             </ul>
         </div>
-    </div>
+      </div>
+      <div class="image">
+       <img src="images\TCP\TCPThumbnail.png">
+      </div>
+
       <!-- IDEATION -->
       <div id="ideation" class="text-section-container">
-        <div class="text-section-title">Ideation</div>
-        <div><h3>User Stories</h3>
-          <p>To gain deeper insights into potential user challenges, I crafted user stories. 
-            These stories not only facilitated my understanding of the product from the user's perspective 
-            but also helped identify essential features and functionalities.</p>
-        </div>
-        <div><h3>Sketching</h3>
-              <p>Understanding the needs and pain points of users was crucial in shaping the design direction. 
-          I explored various approaches to ensure the platform is both intuitive and accessible.
-        </p>
-        <img src="CS-TCP/ideation-sketch.png" alt="Sketches of ideas" class="responsive-img">
-      </div>
-    </div>
-
-      <!-- DESIGN -->
-      <div id="design" class="text-section-container">
-        <div class="text-section-title">Design</div>
         <div><h3>User Stories</h3>
         <p>To gain deeper insights into potential user challenges, I crafted user stories. 
           These stories not only facilitated my understanding of the product from the user's perspective 
           but also helped identify essential features and functionalities.</p>
+          <ul>
+               <li>As a user, I want to effortlessly create an account</li>
+                <li>As a user, I want a user-friendly search functionality that allows me to easily find relevant and valuable resources for my needs</li>
+                <li>As a user, I desire the ability to both contribute my own reviews and read reviews from fellow users, providing me with valuable insights and experiences shared by the community</li>
+                <li>As a user, I wish to have the option to add a resource that I have discovered</li>
+                <li>As a user, I aim to have the option to discover events in my local area</li>
+          </ul>
         </div>
+
+       </div>     
+            
+      <div class="text-section-container two-column">
+        <div><h3>Sketching</h3>
+            <p>Understanding the needs and pain points of users was crucial in shaping the design direction. I explored a range of early ideas through quick sketches to rapidly iterate and visualize potential solutions. This allowed me to efficiently discuss directions with the client and ensure that the evolving vision aligned with their goals. These low-fidelity sketches also helped validate that new user flows would integrate well with the existing content and accommodate real user scenarios.</p>
+        </div>
+        <div class="cs-image">
+          <img src="images\TCP\ideation.png">
+        </div>
+      </div>
+    
+
+      <!-- DESIGN -->
+      <div id="design" class="text-section-container">
+        <div class="text-section-title">Design</div>
         <div><h3>Usability Testing</h3>
       <p>To ensure the design met user expectations, I conducted usability tests and gathered feedback. Iterations were made to improve the experience based on real user interactions.
         </p>
@@ -233,7 +230,10 @@
     </div>
     </main>
   </div>
-
+<footer class="site-footer">
+  <p>© 2025 Made by Marcus Ferreira</p>
+</footer>
+</html>
   <script>
     window.scrollTo(0, 0);
 
