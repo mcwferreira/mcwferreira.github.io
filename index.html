@@ -4,88 +4,90 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Marcus Ferreira</title>
-  <link rel="stylesheet" href="styles.css"/>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
-  <nav class="top-nav" id="topNav">
-    <div class="container nav-content">
-      <a href="#" class="logo">Marcus Ferreira</a>
-      <button class="hamburger" id="hamburger">&#9776;</button>
-      <div class="nav-links" id="navLinks">
-        <a href="#">Home</a>
-        <a href="#">About</a>
-        <a href="MF/Marcus_ferreira_resume.pdf" target="_blank">Resume</a>
-        <a href="https://www.linkedin.com/in/marcuscferreira" target="_blank">LinkedIn</a>
-      </div>
+  <nav class="top-nav">
+  <div class="top-nav-content">
+    <a href="#" class="logo">Marcus Ferreira</a>
+    <div class="nav-links" id="navLinks">
+      <a href="#">About</a>
+      <a href="MF/Marcus_ferreira_resume.pdf">Resume</a>
+      <a href="https://www.linkedin.com/in/marcuscferreira">LinkedIn</a>
     </div>
-  </nav>
+    <button class="hamburger" id="hamburger">&#9776;</button>
+  </div>
+</nav>
 
   <header class="hero container">
-    <div class="intro-text">
+    <div class="intro-text layout-one-col">
       <h1>Hi, I'm Marcus. A product designer from Nashville, TN.</h1>
+      <div class="hero-bar"></div>
       <p>Specializing in crafting strategic UX solutions, I use data-driven insights to create user experiences 
         that not only perform, but are also enjoyable. As a former landscape architect, 
         I've learned that whether it's a physical site or a digital site, the secret to success 
         is all in the layout.</p>
-    </div>
+          </div>
     <div class="profile-img-container">
-      <img class="profile-img" src="MF\ME.PNG" alt="Profile" />
+      <img class="profile-img" src="MF/ME.PNG" alt="Profile image of Marcus Ferreira" />
     </div>
-    </header>
-  
-  <section class="projects container"> 
-    <div class="cs cs-1">
+  </header>
+
+  <section class="container layout-one-col" id="projects">
+    <a href="mcwferreira.github.io/nyli.html" class="cs">
       <div class="cs-image">
-        <a href="mcwferreira.github.io\tcp.html"><img src="images/TCP/TCPThumbnail.png" alt="NYLI Thumbnail" /></a>
+        <img src="images/Uspire/UspireThumbnail.png" alt="TCP Thumbnail" />
       </div>
-      <div class="cs-info">
-        <div class="cs-text">
-          <h2 class="cs-title">New York Life Investments</h2>
-          <p class="cs-subtext">Financial Services | CMS | Enterprise</p>
-          <p class="cs-description">  Financial enterprise platform using AEM and a shared design system.</p>
-        </div>
-        <div class="cs-button-wrapper">
-          <a href="mcwferreira.github.io\tcp.html" class="button">See Case Study</a>
+      <div class="cs-info layout-one-col">
+        <h2 class="cs-title">New York Life Investments</h2>
+        <p class="cs-subtext">Financial Services | CMS | Enterprise</p>
+        <p class="cs-description">Financial enterprise platform using AEM and a shared design system.</p>
+        <div class="button-wrapper">
+          <span class="button">See Case Study</span>
         </div>
       </div>
-    </div>
+    </a>
+
+    <a href="mcwferreira.github.io/tcp.html" class="cs">
+      <div class="cs-image">
+        <img src="images/TCP/TCPThumbnail.png" alt="Connected Parent Thumbnail" />
+      </div>
+      <div class="cs-info layout-one-col">
+        <h2 class="cs-title">The Connected Parent</h2>
+        <p class="cs-subtext">SaaS | Branding | Creative</p>
+        <p class="cs-description">Web Application built to help families find and rate disability resources.</p>
+        <div class="button-wrapper">
+          <span class="button">See Case Study</span>
+        </div>
+      </div>
+    </a>
     
-    <div class="cs cs-2">
+     <a href="mcwferreira.github.io/tcp.html" class="cs">
       <div class="cs-image">
-        <a href="mcwferreira.github.io\nyli.html"><img src="images\TCP\TCPThumbnail.png" alt="Connected Parent Thumbnail" /></a>
+        <img src="images/Uspire/UspireThumbnail.png" alt="TCP Thumbnail" />
       </div>
-      <div class="cs-info">
-        <div class="cs-text">
-          <h2 class="cs-title">The Connected Parent</h2>
-          <p class="cs-subtext">SaaS | Branding | Creative</p>
-          <p class="cs-description">Web Application built to help families find and rate disability resources near them</p>
-        </div>
-        <div class="cs-button-wrapper">
-          <a href="mcwferreira.github.io\nyli.html" class="button">See Case Study</a>
+      <div class="cs-info layout-one-col">
+        <h2 class="cs-title">Uspire</h2>
+        <p class="cs-subtext">C2C | Product | Design</p>
+        <p class="cs-description">Mobile app linking students with study abroad advisors and test prep support.</p>
+        <div class="button-wrapper">
+          <span class="button">See Case Study</span>
         </div>
       </div>
-    </div>
-
-    <div class="cs cs-3">
-      <div class="cs-image">
-        <a href="mcwferreira.github.io\uspire.html"><img src="images\Uspire\UspireThumbnail.png" alt="Uspire UspireThumbnail" /></a>
-      </div>
-      <div class="cs-info">
-        <div class="cs-text">
-          <h2 class="cs-title">Uspire</h2>
-          <p class="cs-subtext">C2C | Product | Design</p>
-          <p class="cs-description">Mobile application that directly links students with study abroad advisors and helps them prepare for tests</p>
-        </div>
-        <div class="cs-button-wrapper">
-          <a href="mcwferreira.github.io\uspire.html" class="button">See Case Study</a>
-        </div>
-      </div>
-    </div>
+    </a>
   </section>
-</body>
 
-<footer class="site-footer">
-  <p>© 2025 Made by Marcus Ferreira</p>
-</footer>
+  <footer class="site-footer">
+    <p>© 2025 Made by Marcus Ferreira</p>
+  </footer>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('show');
+    });
+  </script>
+</body>
 </html>
