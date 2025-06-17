@@ -29,8 +29,8 @@
         I've learned that whether it's a physical site or a digital site, the secret to success 
         is all in the layout.</p>
           </div>
-    <div class="profile-img-container">
-      <img class="profile-img" src="MF/ME.PNG" alt="Profile image of Marcus Ferreira" />
+    <div class="profile-img-container" id="profileContainer">
+        <img class="profile-img" id="profileImg" src="mf/me.png" alt="Profile" />
     </div>
   </header>
 
@@ -83,11 +83,61 @@
   </footer>
 
   <script>
+  // Nav bar
     const hamburger = document.getElementById('hamburger');
     const navLinks = document.getElementById('navLinks');
     hamburger.addEventListener('click', () => {
       navLinks.classList.toggle('show');
     });
+
+  // Squats
+  const container = document.getElementById('profileContainer');
+  const img = document.getElementById('profileImg');
+  const totalFrames = 15;
+  let currentFrame = 1;
+  let intervalId = null;
+  let isMobileCycling = false;
+
+  // Preload all squat images
+  for (let i = 1; i <= totalFrames; i++) {
+    const padded = String(i).padStart(2, '0');
+    const preloadImg = new Image();
+    preloadImg.src = `images/squat/${padded}.webp`;
+  }
+
+  function startCycling() {
+  if (intervalId) return;
+  currentFrame = 1;
+  img.src = `images/squat/01.webp`; // Show first squat image instantly
+  intervalId = setInterval(() => {
+    currentFrame = (currentFrame % totalFrames) + 1;
+    const padded = String(currentFrame).padStart(2, '0');
+    img.src = `images/squat/${padded}.webp`;
+  }, 700);
+  }
+
+  function stopCycling() {
+    clearInterval(intervalId);
+    intervalId = null;
+    currentFrame = 1;
+    img.src = 'mf/me.png';
+  }
+
+  // Hover (desktop)
+  container.addEventListener('mouseenter', startCycling);
+  container.addEventListener('mouseleave', stopCycling);
+
+  // Tap (mobile)
+  container.addEventListener('click', () => {
+    if (window.matchMedia('(hover: none)').matches) {
+      isMobileCycling = !isMobileCycling;
+      if (isMobileCycling) {
+        startCycling();
+      } else {
+        stopCycling();
+      }
+    }
+  });
   </script>
 </body>
 </html>
