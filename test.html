@@ -1,0 +1,591 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>The Future of Casa Hardware — Mock</title>
+
+  <!-- Full long-form CSS (no shorthand omissions) -->
+  <style>
+    /* CSS Variables */
+    :root {
+      --page-max-width: 760px;
+      --page-padding: 28px;
+      --gutter: 20px;
+
+      --bg: #ffffff;
+      --muted: #6b6b6b;
+      --text: #222222;
+      --accent: #f59e0b; /* gold / orange */
+      --muted-2: #f6f6f6;
+
+      --sans: "Inter", "Helvetica Neue", Arial, sans-serif;
+      --serif: "Georgia", "Times New Roman", serif;
+
+      --radius: 16px;
+      --card-radius: 12px;
+      --shadow: 0 10px 30px rgba(20,20,20,0.06);
+      --small-shadow: 0 6px 18px rgba(20,20,20,0.04);
+    }
+
+    /* Basic reset */
+    html, body, div, span, applet, object, iframe,
+    h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+    a, abbr, acronym, address, big, cite, code,
+    del, dfn, em, img, ins, kbd, q, s, samp,
+    small, strike, strong, sub, sup, tt, var,
+    b, u, i, center,
+    dl, dt, dd, ol, ul, li,
+    fieldset, form, label, legend,
+    table, caption, tbody, tfoot, thead, tr, th, td {
+      margin: 0;
+      padding: 0;
+      border: 0;
+      vertical-align: baseline;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      line-height: 1.5;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    /* Page layout: left nav + centered content */
+    .site {
+      display: flex;
+      align-items: flex-start;
+      gap: 32px;
+      padding: 36px var(--page-padding);
+      justify-content: center;
+    }
+
+    /* Left column nav (small) */
+    .left-nav {
+      width: 120px;
+      min-width: 88px;
+      font-size: 13px;
+      color: var(--muted);
+      position: sticky;
+      top: 28px;
+      align-self: flex-start;
+      height: calc(100vh - 56px);
+    }
+
+    .left-nav nav {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      position: relative;
+      margin-top: 6px;
+    }
+
+    .left-nav a {
+      text-decoration: none;
+      color: var(--muted);
+      padding: 6px 0;
+      display: inline-block;
+    }
+
+    .left-nav .brand {
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 18px;
+      font-size: 14px;
+    }
+
+    /* Main content column */
+    .content {
+      width: 100%;
+      max-width: var(--page-max-width);
+      min-width: 300px;
+    }
+
+    /* Article header */
+    .article {
+      display: block;
+    }
+
+    .meta {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    h1.title {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: 28px;
+      margin-bottom: 18px;
+      color: var(--text);
+      line-height: 1.12;
+    }
+
+    .hero {
+      width: 100%;
+      height: 300px;
+      border-radius: 14px;
+      background-image: linear-gradient(135deg, #fbbf24 0%, #fb923c 45%, #ef9a9a 100%);
+      box-shadow: var(--small-shadow);
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-family: var(--sans);
+      font-weight: 600;
+      font-size: 22px;
+    }
+
+    .kicker {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 22px;
+      align-items: center;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* Article body */
+    article p {
+      margin-bottom: 16px;
+      color: var(--text);
+      font-size: 16px;
+    }
+
+    article p.lead {
+      font-size: 17px;
+      color: #2f2f2f;
+      margin-bottom: 22px;
+    }
+
+    /* Image card */
+    .figure {
+      margin: 22px 0;
+      border-radius: var(--card-radius);
+      overflow: hidden;
+      box-shadow: var(--small-shadow);
+      background: white;
+    }
+
+    .figure .img {
+      width: 100%;
+      height: 220px;
+      background-size: cover;
+      background-position: center;
+      display: block;
+    }
+
+    .figure .caption {
+      padding: 12px 14px;
+      font-size: 13px;
+      color: var(--muted);
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.01));
+    }
+
+    /* Two-up image row */
+    .two-up {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin: 20px 0;
+      align-items: start;
+    }
+
+    .two-up .item {
+      border-radius: 12px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: var(--small-shadow);
+    }
+
+    .two-up .thumb {
+      width: 100%;
+      height: 160px;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .two-up .small-caption {
+      padding: 10px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* Phone mockups column */
+    .phone-gallery {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+      margin: 18px 0 36px 0;
+    }
+
+    .phone {
+      width: 260px;
+      max-width: 100%;
+      height: 520px;
+      border-radius: 38px;
+      border: 12px solid #fff;
+      background: linear-gradient(180deg, #fff 0%, #fff 100%);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+      overflow: hidden;
+      position: relative;
+      margin: 0 auto;
+    }
+
+    .phone .screen {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(180deg, #fff 0%, #f9f7f3 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      color: var(--muted);
+      padding: 22px;
+    }
+
+    /* Small components row (circular devices) */
+    .components {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      margin: 24px 0 40px 0;
+      justify-content: flex-start;
+    }
+
+    .component {
+      width: 110px;
+      background: #fff;
+      border-radius: 12px;
+      padding: 12px;
+      box-shadow: var(--small-shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .component .circle {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.7), rgba(0,0,0,0.05));
+      display: block;
+    }
+
+    .component .comp-caption {
+      font-size: 13px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    /* small gallery grid */
+    .thumb-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 18px 0 24px 0;
+    }
+
+    .thumb-grid .tg {
+      height: 120px;
+      border-radius: 10px;
+      background-size: cover;
+      background-position: center;
+      box-shadow: var(--small-shadow);
+    }
+
+    /* Inline callout / note */
+    .callout {
+      border-radius: 12px;
+      background: linear-gradient(180deg, rgba(255,158,8,0.08), rgba(255,158,8,0.03));
+      border: 1px solid rgba(245,158,11,0.12);
+      padding: 14px;
+      margin: 18px 0;
+      font-size: 15px;
+      color: #3a3a3a;
+    }
+
+    /* Author row */
+    .author {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      margin: 36px 0 20px 0;
+    }
+
+    .author .avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(180deg, #e1e1e1, #cfcfcf);
+      flex-shrink: 0;
+    }
+
+    .author .byline {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .divider {
+      height: 1px;
+      width: 100%;
+      background: #f0f0f0;
+      margin: 26px 0;
+    }
+
+    /* Small right-floating dot actions to mimic screenshot dots */
+    .right-dots {
+      position: fixed;
+      right: 18px;
+      top: 40vh;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      z-index: 60;
+    }
+
+    .right-dots .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(180,180,180,0.8);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    }
+
+    .right-dots .dot.accent {
+      background: var(--accent);
+      width: 10px;
+      height: 10px;
+    }
+
+    /* Footer note */
+    footer {
+      margin-top: 60px;
+      padding: 32px 0;
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 980px) {
+      .site {
+        padding: 28px 20px;
+      }
+      .left-nav {
+        display: none;
+      }
+      .right-dots {
+        display: none;
+      }
+      .hero {
+        height: 220px;
+      }
+      .phone {
+        height: 420px;
+      }
+    }
+
+    @media (max-width: 420px) {
+      :root {
+        --page-padding: 16px;
+        --page-max-width: 420px;
+      }
+      .two-up {
+        grid-template-columns: 1fr;
+      }
+      .thumb-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .components {
+        justify-content: center;
+      }
+      .hero {
+        height: 180px;
+        font-size: 18px;
+      }
+    }
+
+    /* Utility */
+    .muted {
+      color: var(--muted);
+    }
+
+    .small {
+      font-size: 13px;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="site">
+    <!-- Left navigation (sticky) -->
+    <aside class="left-nav" aria-label="Site navigation">
+      <div class="brand">rachelchen</div>
+      <nav>
+        <a href="#">Projects</a>
+        <a href="#">Articles</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+        <a href="#">GitHub</a>
+      </nav>
+    </aside>
+
+    <!-- Main content area -->
+    <main class="content" role="main">
+      <header class="article">
+        <div class="meta">Case Study · Design · Product</div>
+        <h1 class="title">The future of Casa hardware</h1>
+
+        <div class="hero" role="img" aria-label="Hero gradient image">
+          Casa hardware — concept prototype
+        </div>
+
+        <div class="kicker">
+          <div class="small muted">By Rachel Chen</div>
+          <div class="small muted">·</div>
+          <div class="small muted">Oct 22, 2025</div>
+        </div>
+      </header>
+
+      <article>
+        <p class="lead">This project explores a compact home hardware ecosystem with a focus on approachable software, physical form, and an app that helps families maintain devices and share access quickly.</p>
+
+        <p>We started with a small set of constraints: the hardware needed to be inexpensive, installable without tools, and the app flow had to be simple enough for non-technical household members. Over several sprints we converged on a modular product and a mobile-first app experience.</p>
+
+        <!-- single image block -->
+        <figure class="figure" aria-hidden="false">
+          <div class="img" style="background-image: linear-gradient(135deg,#ffd08a 0%, #ffb28f 40%, #d9a0ff 100%); height: 220px;"></div>
+          <figcaption class="caption">Initial moodboard and material explorations.</figcaption>
+        </figure>
+
+        <p>We built quick prototypes using 3D-printed casings and off-the-shelf sensors. The early tests prioritized mounting, power, and discoverability.</p>
+
+        <!-- two up images -->
+        <section class="two-up" aria-label="photo comparisons">
+          <div class="item">
+            <div class="thumb" style="background-image: linear-gradient(180deg,#f7f3ef,#efe6dc); height:160px;"></div>
+            <div class="small-caption">Prototype A — clip-on sensor</div>
+          </div>
+          <div class="item">
+            <div class="thumb" style="background-image: linear-gradient(180deg,#fff6e8,#ffecd2); height:160px;"></div>
+            <div class="small-caption">Prototype B — adhesive puck</div>
+          </div>
+        </section>
+
+        <p>Discoverability was a recurring problem. We experimented with a minimal pairing flow that relied on proximity and pictured prompts so users could follow instructions quickly.</p>
+
+        <!-- phone mockups repeated to mimic long page -->
+        <section class="phone-gallery" aria-label="phone mockups">
+          <div class="phone" aria-hidden="false">
+            <div class="screen">
+              <div style="max-width:220px;text-align:center;">
+                <h3 style="font-size:16px;margin-bottom:8px;">Add Device</h3>
+                <p class="small muted">Tap the device to begin pairing</p>
+                <div style="margin-top:16px;background:#f6f6f6;border-radius:10px;padding:12px;">[ pairing animation ]</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="phone" aria-hidden="false">
+            <div class="screen">
+              <div style="max-width:220px;text-align:center;">
+                <h3 style="font-size:16px;margin-bottom:8px;">Device Home</h3>
+                <p class="small muted">Status, battery, and quick actions</p>
+                <div style="margin-top:16px;background:#f6f6f6;border-radius:10px;padding:12px;">[ status card ]</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="phone" aria-hidden="false">
+            <div class="screen">
+              <div style="max-width:220px;text-align:center;">
+                <h3 style="font-size:16px;margin-bottom:8px;">Shared Access</h3>
+                <p class="small muted">Invite household members with a tap</p>
+                <div style="margin-top:16px;background:#fff9ef;border-radius:10px;padding:12px;">[ share modal ]</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <p>We emphasized three flows: install, invite, and routine automation. Each flow was reduced to no more than three screens to lower cognitive load.</p>
+
+        <!-- components row -->
+        <div class="components" aria-label="hardware components">
+          <div class="component" title="sensor">
+            <div class="circle" style="background: linear-gradient(135deg,#fff,#efeae6);"></div>
+            <div class="comp-caption">Sensor puck</div>
+          </div>
+
+          <div class="component" title="hub">
+            <div class="circle" style="background: linear-gradient(135deg,#fff,#efeef6);"></div>
+            <div class="comp-caption">Bridge / Hub</div>
+          </div>
+
+          <div class="component" title="mount">
+            <div class="circle" style="background: linear-gradient(135deg,#fff,#f6f9f6);"></div>
+            <div class="comp-caption">Magnetic mount</div>
+          </div>
+        </div>
+
+        <p>We also created small marketing photography sets to show devices in-context. Those shots were used across the product page and the app onboarding flows.</p>
+
+        <!-- small thumb grid -->
+        <div class="thumb-grid" aria-label="in-context photos">
+          <div class="tg" style="background-image: linear-gradient(180deg,#fff6f0,#ffe7d1);"></div>
+          <div class="tg" style="background-image: linear-gradient(180deg,#f0fff6,#d1ffe9);"></div>
+          <div class="tg" style="background-image: linear-gradient(180deg,#f0f6ff,#d1e0ff);"></div>
+          <div class="tg" style="background-image: linear-gradient(180deg,#fff8f6,#ffeef0);"></div>
+          <div class="tg" style="background-image: linear-gradient(180deg,#fefcf2,#fff2d8);"></div>
+          <div class="tg" style="background-image: linear-gradient(180deg,#f2f8ff,#e5f0ff);"></div>
+        </div>
+
+        <div class="callout">
+          <strong>Design note:</strong> Keep the app flows short and image-forward. Use real photos of the devices in-context for onboarding to increase trust and reduce confusion.
+        </div>
+
+        <p>Below are more screenshots of the production app and a few short observations from the testing round.</p>
+
+        <!-- another image -->
+        <figure class="figure">
+          <div class="img" style="background-image: linear-gradient(135deg,#ffd7d7 0%, #ffd6a5 40%, #fbd6ff 100%); height:220px;"></div>
+          <figcaption class="caption">Production UI: simplified device card patterns and shared access flow.</figcaption>
+        </figure>
+
+        <div class="divider" role="separator"></div>
+
+        <div class="author">
+          <div class="avatar" aria-hidden="true"></div>
+          <div class="byline">
+            <div style="font-weight:600;">Rachel Chen</div>
+            <div class="small muted">Product Designer · rachelchen.tech</div>
+          </div>
+        </div>
+
+        <p class="small muted">If you'd like the downloadable case study PDF or the prototype files, send me a note and I will share them.</p>
+      </article>
+
+      <footer>
+        © 2025 Rachel Chen · Design & Hardware Case Studies
+      </footer>
+    </main>
+
+    <!-- Right floating dots to match screenshot accents -->
+    <div class="right-dots" aria-hidden="true">
+      <div class="dot"></div>
+      <div class="dot accent"></div>
+      <div class="dot"></div>
+    </div>
+  </div>
+
+</body>
+</html>
