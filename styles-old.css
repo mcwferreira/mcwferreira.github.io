@@ -9,7 +9,7 @@
 
 :root {
   --site-pad: 2rem;
-  --container: 1100px;
+  
 
   --smoke: #69688F;
   --lsmoke: rgba(105, 104, 143, 0.1);
@@ -37,7 +37,7 @@
 body {
   margin: 0;
   font-family: var(--body-font);
-  background: #F5F5F0;
+
   font-size: 15px;
   letter-spacing: 0.2px;
   font-weight: 400;
@@ -86,14 +86,7 @@ h3 {
    
 }
 
-.container {
-  width: 100%;
-  max-width: var(--container);
-  margin: 0 auto;
-  padding-left: var(--site-pad);
-  padding-right: var(--site-pad);
-  box-sizing: border-box;
-}
+
 
 .color {
   background-color: var(--lsmoke);
@@ -187,13 +180,6 @@ h3 {
   font-size: 14px;
   font-weight: bold;
   padding: 6px 12px;
-}
-
-.highlight-outline {
-  border: 2px solid var(--lsmoke);
-  padding: 24px;
-  border-radius: var(--corner-radius);
-  color: var(--smoke);
 }
 
 .bullet-list {
