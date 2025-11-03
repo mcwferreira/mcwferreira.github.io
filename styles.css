@@ -120,11 +120,13 @@ p {
 .hero-container .inner {
   position: relative;
   z-index: 2;
-  max-width: var(--site-max-width);
+  max-width: var(--container);
   margin: 0 auto;
   padding-left: 120px;
   padding-right: 120px;
+  box-sizing: border-box;
 }
+
 
 .hero-container .button-wrapper {
   margin-top: 48px;
@@ -257,6 +259,7 @@ p {
   aspect-ratio: 16 / 9;     
   max-width: 100%;      
   margin: 48px 0px 48px 0px;
+  
 }
 
 .prototype-embed iframe {
@@ -264,6 +267,7 @@ p {
   height: 100%;
   border: 0;
   display: block;
+  
 }
    
 /*Button Things~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
@@ -289,6 +293,8 @@ p {
   color: #fff;
   background: none;
   text-decoration: none;
+  border-radius: 40px;
+  border: 1px solid #fff;
   font-size: 18x;
   padding: 12px 32px;
   border-radius: 40px;
@@ -298,8 +304,8 @@ p {
 }
 
 .button-hero:hover {
-  background:rgb(16, 16, 16);
-  
+  background:#fff;
+  color: var(--black);
   
 }
 
@@ -343,7 +349,7 @@ p {
   transform: translateY(20px);
   display: inline-block;
   animation: fadeInUp 1s ease forwards;
-  animation-delay: 1.4s; 
+  animation-delay: .3s; 
 }
 
 @keyframes fadeInUp {
@@ -640,8 +646,7 @@ p {
   }
 
   /* layout adjustments */
-  .hero-info,
-  .three-col-list {
+  .hero-info {
     flex-direction: column;
     gap: 24px;
   }
@@ -653,11 +658,15 @@ p {
 
 /* --- Small Mobile (≤600px) --- */
 @media (max-width: 600px) {
-    .container,
+  .container,
   .hero-container .inner,
   .nav-inner {
     padding-left: 20px;
     padding-right: 20px;
+  }
+
+  h1 {
+    font-size: 48px;
   }
 
   .profile-img-container {
