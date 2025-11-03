@@ -393,12 +393,14 @@ p {
 .nav-inner {
   height: 100%;
   display: flex;
+  max-width: var(--container);
   align-items: center;
   justify-content: space-between;
   width: 100%;
   padding-left: 120px;
   padding-right: 120px;
   box-sizing: border-box;
+  margin: 0 auto;
 }
 
 .top-nav.scrolled {
@@ -666,6 +668,7 @@ p {
   .text-columns {
     flex-direction: column;
     gap: 24px;
+    margin: 0 auto;
   }
   
   .cs {
