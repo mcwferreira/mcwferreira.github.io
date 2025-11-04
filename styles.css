@@ -150,7 +150,7 @@ p {
    
    .two-col {
     display: flex;
-    align-items: center;
+    align-items: top;
     gap: 48px;
     margin: 48px auto;
   }
@@ -532,17 +532,10 @@ p {
 }
 
 
-/* show hamburger on mobile */
-@media (max-width: 768px) {
-  .hamburger {
-    display: block;
-  }
-}
-
 
 .site-footer {
   text-align: center;
-  margin-top: 120px;
+  margin-top: 80px;
   padding: 40px 0;
 }
 
@@ -703,6 +696,30 @@ p {
    MEDIA QUERIES
    =========================== */
 
+/* Desktop nav */
+@media (min-width: 769px) {
+  .nav-links {
+    display: flex;               /* show links */
+    flex-direction: row;         /* horizontal links */
+    justify-content: flex-end;   /* push links to the right */
+    align-items: center;         /* vertical align */
+    gap: 32px;                   /* space between items (adjustable) */
+    opacity: 1;
+    pointer-events: auto;
+    position: static;            /* normal desktop flow */
+    padding: 0;                  /* remove mobile padding */
+    margin-left: auto;            /* pushes links away from logo */
+  }
+
+  .logo {
+    margin-right: 32px;          /* gap between logo and menu, adjustable */
+    white-space: nowrap;      /* prevents text from wrapping */
+    flex-shrink: 0;           /* don't shrink in flex layout */
+    
+  }
+}
+
+
 /* --- Tablet (≤1000px) --- */
 @media (max-width: 1000px) {
   /* container padding */
@@ -784,6 +801,10 @@ p {
   .nav-inner {
     padding-left: 20px;
     padding-right: 20px;
+  }
+
+  .stats-container {
+    align-items: center; 
   }
 
   h1 {
