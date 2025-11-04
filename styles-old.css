@@ -13,7 +13,7 @@
 
   --smoke: #69688F;
   --lsmoke: rgba(105, 104, 143, 0.1);
-  --gray1: #D5D5DD;
+  
   --gray2: #747474;
   --gray3: #181818;
   --tea: #D4E6B5;
@@ -228,7 +228,7 @@ h3 {
 .hero h1 {
   font-size: 48px;
   line-height: 60px;
-  font-family: var(--display-font);
+  font-family: 'PT Serif', serif;
   font-weight: 500;
   margin: 0;
 }

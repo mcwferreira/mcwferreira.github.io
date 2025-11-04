@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Connected Parent Case Study</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <nav class="top-nav">
+    <div class="nav-inner">
+      <a href="index.html" class="logo">Marcus Ferreira</a>
+      <div class="nav-links" id="navLinks">
+        <a href="about.html">About</a>
+        <a href="MF/Marcus_Ferreira_Resume.pdf">Resume</a>
+        <a href="https://www.linkedin.com/in/marcuscferreira">LinkedIn</a>
+      </div>
+      <button class="hamburger" id="hamburger">&#9776;</button>
+    </div>
+  </nav>
+  
+  <div class="container">
+    <div class="cs-info layout-one-col">
+        <h2 class="cs-title">Hey there</h2>
+        
+        
+      </div>
+      <div class="cs-image home">
+        
+      </div>
+</div>
+
+<div class="two-col container">
+  <div class="text-col">
+    <h2>Hey there</h2>
+    <p>I'm Marcus Ferreira, a UX/UI Designer based in vibrant Nashville, TN.
+        
+      Creativity and design have been dynamic and ever-evolving aspects of my life since I was old enough to hold a pencil. From those early days of sketching fantasy characters and sci-fi scenes that existed solely in my imagination to my decade’s worth of professional design experience in the field of landscape architecture, my creative journey has been a series of transformative phases that ultimately led me to where I am now as a UX/UI designer.
+        
+      In my portfolio, you'll discover a diverse collection of projects, each a testament to the meticulous care, attention, and creativity I invest in every endeavor. I invite you to review them and see the quality of work I aim to produce.
+      </p>
+  </div>
+  <div class="image-col">
+    <div class="image-frame">
+      <img src="images/about/sandcastle.webp" alt="Me and a sand sculpture">
+    </div>
+  </div>
+</div>
+
+<div class="two-col container">
+  <div class="image-col">
+    <div class="image-frame">
+      <img src="images/about/housedesign.webp" alt="Full height image" class="Residential site plan">
+    </div>
+  </div>
+  <div class="text-col">
+    <h2>From Landscape to UX</h2>
+    <p class="p">During my ten years in Landscape Architecture, I was naturally drawn to emerging technology innovations, always eager to adopt new tools and techniques to enhance my design capabilities. This curiosity about technology and my lifelong love for design eventually led me into the world of UX/UI.</p>
+      <p>- As a landscape designer, I learned:</p>
+      <p>- To appreciate the importance of user experience on a physical scale - creating spaces that not only look beautiful but also function seamlessly</p>
+      <p>- How to work closely with a cross-functional team in order to meet tight deadlines in a fast-paced, agile work environment</p>
+      <p>- The importance of utilizing qualitative and quantitative research to understand design constraints and possibilities</p>
+      <p><strong>Today, I have seamlessly channeled these skills and many others into creating impactful digital experiences that keep the end user in mind.</strong></p>
+  </div>
+</div>
+
+  <section class="section-container">
+    <div class="container">
+      <h2>When I'm not designing</h2>
+      <p class="p">You can catch me sketching on paper + iPad, throwing pottery, making sushi, traveling with my wife & pup in our self-converted van, or playing 3-minute chess. I'm a hobbyist DIYer and spend the majority of my free time either building something or thinking about what to build next.</p>
+      <div class="image-row">
+        <div class="cs-image highlight-outline">
+          <img src="images/about/sketch.webp" alt="Ink sketch" />
+          <p class="p4">Ink sketch</p>
+        </div>
+        <div class="cs-image highlight-outline">
+          <img src="images/about/van.webp" alt="Van" />
+          <p class="p4">My wife and I in front of our converted van</p>
+        </div>
+        <div class="cs-image highlight-outline">
+          <img src="images/about/sand.webp" alt="Sand" />
+          <p class="p4">White Sands National Park</p>
+        </div>
+      </div>
+    
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <p>© 2025 Made by Marcus Ferreira</p>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // ----- HERO ANIMATIONS -----
+      const heroH1 = document.querySelector('.hero-h1');
+      const heroButton = document.querySelector('.button-hero');
+    
+      if (heroH1) {
+        requestAnimationFrame(() => {
+          heroH1.classList.add('show');
+          setTimeout(() => heroButton?.classList.add('show'), 150);
+        });
+      }
+    
+      // ----- HERO BACKGROUND IMAGE -----
+      document.querySelectorAll('.hero-container').forEach(hero => {
+        const bg = hero.getAttribute('data-bg');
+        if (bg) {
+          const img = new Image();
+          img.src = bg;
+          img.onload = () => {
+            hero.style.backgroundImage = `url(${bg})`;
+            hero.classList.add('bg-loaded');
+          };
+        }
+      });
+    
+      // ----- GENERIC FADE-IN / ANIMATION OBSERVER -----
+      const animateObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('show');
+            animateObserver.unobserve(entry.target); // optional: stop observing once shown
+          }
+        });
+      }, { threshold: 0.2 });
+    
+      document.querySelectorAll('.fade-in, .animate-left').forEach(el => {
+        animateObserver.observe(el);
+      });
+    
+      // ----- STATS COUNTER ANIMATION -----
+      const statsObserver = new IntersectionObserver(entries => {
+        entries.forEach((entry, index) => {
+          if (!entry.isIntersecting) return;
+          const el = entry.target;
+          if (el.dataset.animated === "true") return;
+    
+          el.dataset.animated = "true";
+          el.classList.add('visible');
+    
+          setTimeout(() => {
+            const target = parseFloat(el.dataset.value);
+            let count = 0;
+            const duration = 1200;
+            const steps = 40;
+            const increment = target / steps;
+            const intervalTime = duration / steps;
+    
+            const counter = setInterval(() => {
+              count += increment;
+              if (count >= target) {
+                el.textContent = target.toFixed(1).replace(/\.0$/, '') + (el.dataset.suffix || '');
+                clearInterval(counter);
+              } else {
+                el.textContent = count.toFixed(1).replace(/\.0$/, '') + (el.dataset.suffix || '');
+              }
+            }, intervalTime);
+          }, index * 150);
+    
+          statsObserver.unobserve(el);
+        });
+      }, { threshold: 0.5 });
+    
+      document.querySelectorAll('.stat').forEach(el => statsObserver.observe(el));
+    
+      // ----- SCROLL TO TOP -----
+      window.scrollTo(0, 0);
+    
+      // ----- NAVIGATION + SIDE MENU -----
+      const sideMenu = document.getElementById("sideMenu");
+      const triggerSection = document.querySelector(".text-section-container.two-column");
+      const titles = document.querySelectorAll(".text-section-title");
+      const navLinks = document.querySelectorAll(".nav-link");
+      const topNav = document.getElementById("topNav");
+      const hamburger = document.getElementById("hamburger");
+      const mobileNavLinks = document.getElementById("navLinks");
+    
+      hamburger.addEventListener("click", () => {
+        mobileNavLinks.classList.toggle("show");
+      });
+    
+      window.addEventListener("scroll", () => {
+        const top = window.scrollY;
+        const overviewBottom = triggerSection.offsetTop + triggerSection.offsetHeight;
+    
+        topNav.classList.toggle("scrolled", top > 10);
+        sideMenu.style.display = top > overviewBottom ? "block" : "none";
+    
+        titles.forEach(title => {
+          const rect = title.getBoundingClientRect();
+          if (rect.top < window.innerHeight - 100) title.classList.add("visible");
+        });
+    
+        navLinks.forEach(link => {
+          const section = document.querySelector(link.getAttribute("href"));
+          if (section && top >= section.offsetTop - 140 && top < section.offsetTop + section.offsetHeight - 140) {
+            link.classList.add("active");
+          } else {
+            link.classList.remove("active");
+          }
+        });
+      });
+    });
+    </script>
+    
+  
+  
+  
+  
+  
+  
+</body>
+</html>
