@@ -5,6 +5,7 @@
      --black: #000;
      --gray: #747474;
      --gray1: #D5D5DD;
+     --gray3: #181818;
      --gold: #FFDF64;
      --corner-radius: 24px;
      --container: 1400px;
@@ -416,7 +417,6 @@ p {
   left: 0;
   right: 0;
   height: 80px;
-  /*backdrop-filter: blur(12px);*/
   -webkit-backdrop-filter: blur(12px);
   background: var(--bg);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -462,13 +462,83 @@ p {
   text-decoration: underline;
 }
 
+/* --- HAMBURGER BUTTON --- */
 .hamburger {
   display: none;
-  background: none;
+  position: relative;
+  width: 32px;
+  height: 24px;
   border: none;
-  font-size: 28px;
+  background: none;
+  padding: 0;
   cursor: pointer;
+  z-index: 1002;
 }
+
+.hamburger span {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: var(--gray3);
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.hamburger span:nth-child(1) {
+  top: 0;
+}
+.hamburger span:nth-child(2) {
+  top: 10px;
+}
+.hamburger span:nth-child(3) {
+  top: 20px;
+}
+
+.hamburger.active span:nth-child(1) {
+  transform: translateY(10px) rotate(45deg);
+}
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.active span:nth-child(3) {
+  transform: translateY(-10px) rotate(-45deg);
+}
+
+.nav-links {
+  position: fixed;
+  top: 80px; /* height of top nav */
+  left: 0;
+  width: 100%; /* full width */
+  background-color: var(--bg); /* overlay color */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start; /* left-align links */
+  padding: 40px 20px 16px 20px;
+  gap: 32px; /* vertical space between links */
+  font-size: 16px; /* bigger font */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 1000;
+  box-sizing: border-box;
+  min-height: auto; /* allows it to shrink to fit content */
+}
+
+.nav-links.show {
+  opacity: 1;
+  pointer-events: all;
+}
+
+
+/* show hamburger on mobile */
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
+}
+
 
 .site-footer {
   text-align: center;
@@ -650,14 +720,16 @@ p {
   .nav-links {
     display: none;
     position: absolute;
-    top: 80px;
-    right: 20px;
-    background: #fff;
-    padding: 16px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+    top: 64px;
+    left: 0; 
+    background: var(--bg);
+    width: 100%;
+    padding: 20px 0px 24px 0px; 
+    border-radius: 0px;
     z-index: 1002;
     flex-direction: column;
+    font-size: 18px; 
+    gap: 24px;
   }
 
   .nav-links.show {
@@ -669,9 +741,22 @@ p {
   }
 
   .nav-links a {
-    margin: 8px 0;
-    font-size: 14px;
+    display: block;       
+    width: 100%;          
+    padding: 0px 0px;
+    margin: 0px 20px;    
+    box-sizing: border-box; 
+    color: var(--gray3);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+    font-size: inherit; 
   }
+  
+  .nav-links a:hover {
+    text-decoration: underline;
+  }
+  
 
   /* layout adjustments */
   .hero-info {

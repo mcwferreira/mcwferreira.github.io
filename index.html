@@ -9,7 +9,26 @@
 </head>
 
 <body>
-  <nav class="top-nav">
+  <nav id="topNav" class="top-nav">
+    <div class="nav-inner">
+      <a href="index.html" class="logo">Marcus Ferreira</a>
+  
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+  
+      <div class="nav-links" id="navLinks">
+        <a href="about.html">About</a>
+        <a href="MF/Marcus_Ferreira_Resume.pdf" target="_blank">Resume</a>
+        <a href="https://www.linkedin.com/in/marcuscferreira" target="_blank">LinkedIn</a>
+      </div>
+    </div>
+  </nav>
+  
+
+  <!--<nav class="top-nav">
     <div class="nav-inner">
       <a href="index.html" class="logo">Marcus Ferreira</a>
       <div class="nav-links" id="navLinks">
@@ -20,7 +39,7 @@
       <button class="hamburger" id="hamburger">&#9776;</button>
     </div>
   </nav>
-
+-->
   <header class="hero container">
     <div class="intro-text layout-one-col">
       <h1>Hi, I'm Marcus. A product designer from Nashville, TN.</h1>
@@ -90,12 +109,13 @@
 
   <script>
   // Nav bar
-    const hamburger = document.getElementById('hamburger');
-    const navLinks = document.getElementById('navLinks');
-    hamburger.addEventListener('click', () => {
-      navLinks.classList.toggle('show');
-    });
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('navLinks');
 
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    navLinks.classList.toggle('show');
+  });
   // Squats
   const container = document.getElementById('profileContainer');
   const img = document.getElementById('profileImg');
@@ -144,6 +164,7 @@
       }
     }
   });
+
   </script>
 </body>
 </html>

@@ -7,15 +7,21 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <nav class="top-nav">
+  <nav id="topNav" class="top-nav">
     <div class="nav-inner">
       <a href="index.html" class="logo">Marcus Ferreira</a>
+  
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+  
       <div class="nav-links" id="navLinks">
         <a href="about.html">About</a>
-        <a href="MF/Marcus_Ferreira_Resume.pdf">Resume</a>
-        <a href="https://www.linkedin.com/in/marcuscferreira">LinkedIn</a>
+        <a href="MF/Marcus_Ferreira_Resume.pdf" target="_blank">Resume</a>
+        <a href="https://www.linkedin.com/in/marcuscferreira" target="_blank">LinkedIn</a>
       </div>
-      <button class="hamburger" id="hamburger">&#9776;</button>
     </div>
   </nav>
   
@@ -177,8 +183,10 @@
       const mobileNavLinks = document.getElementById("navLinks");
     
       hamburger.addEventListener("click", () => {
-        mobileNavLinks.classList.toggle("show");
+      hamburger.classList.toggle("active");
+      mobileNavLinks.classList.toggle("show");
       });
+
     
       window.addEventListener("scroll", () => {
         const top = window.scrollY;
