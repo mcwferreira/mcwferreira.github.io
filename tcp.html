@@ -250,9 +250,14 @@
     <p>© 2025 Made by Marcus Ferreira</p>
   </footer>
 
+  <div class="lightbox" id="lightbox">
+    <span class="close">&times;</span>
+    <img class="lightbox-img" id="lightbox-img" src="" alt="">
+  </div>
+
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // ----- HERO ANIMATIONS -----
+      // ----- HERO ANIMATION -----
       const heroH1 = document.querySelector('.hero-h1');
       const heroButton = document.querySelector('.button-hero');
     
@@ -262,6 +267,50 @@
           setTimeout(() => heroButton?.classList.add('show'), 150);
         });
       }
+    
+      // ----- LIGHTBOX FUNCTIONALITY -----
+      // Create lightbox
+      const lightbox = document.createElement("div");
+      lightbox.classList.add("lightbox");
+      lightbox.style.display = "none"; // initially hidden
+      lightbox.innerHTML = `
+        <span class="close">&times;</span>
+        <img class="lightbox-img" src="" alt="Expanded view">
+      `;
+      document.body.appendChild(lightbox);
+    
+      const lightboxImg = lightbox.querySelector(".lightbox-img");
+      const closeBtn = lightbox.querySelector(".close");
+      const navbar = document.getElementById("topNav") || document.querySelector("nav");
+    
+      // Select all clickable images
+      const clickableImages = document.querySelectorAll(".cs-image img, .fullscreen-image");
+    
+      clickableImages.forEach(img => {
+        img.addEventListener("click", () => {
+          lightboxImg.src = img.src;
+          lightbox.style.display = "flex";
+          document.body.style.overflow = "hidden";
+          if (navbar) navbar.style.display = "none"; // hide navbar
+        });
+      });
+    
+      // Close lightbox
+      function closeLightbox() {
+        lightbox.style.display = "none";
+        lightboxImg.src = "";
+        document.body.style.overflow = "";
+        if (navbar) navbar.style.display = ""; // show navbar
+      }
+    
+      // Close events
+      closeBtn.addEventListener("click", closeLightbox);
+      lightbox.addEventListener("click", (e) => {
+        if (e.target === lightbox) closeLightbox();
+      });
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeLightbox();
+      });
     
       // ----- HERO BACKGROUND IMAGE -----
       document.querySelectorAll('.hero-container').forEach(hero => {
@@ -281,7 +330,7 @@
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             entry.target.classList.add('show');
-            animateObserver.unobserve(entry.target); // optional: stop observing once shown
+            animateObserver.unobserve(entry.target);
           }
         });
       }, { threshold: 0.2 });
@@ -333,7 +382,6 @@
       const triggerSection = document.querySelector(".text-section-container.two-column");
       const titles = document.querySelectorAll(".text-section-title");
       const navLinks = document.querySelectorAll(".nav-link");
-      const topNav = document.getElementById("topNav");
       const hamburger = document.getElementById("hamburger");
       const mobileNavLinks = document.getElementById("navLinks");
     
@@ -364,6 +412,9 @@
       });
     });
     </script>
+    
+    
+
     
   
   

@@ -278,7 +278,8 @@ p {
   max-width: 100%;        
   object-fit: contain;    
   display: block;
-  margin: 48px 0px 48px 0px;    
+  margin: 48px 0px 48px 0px;   
+  cursor: pointer;
 }
 
 .prototype-embed {
@@ -545,7 +546,6 @@ p {
 }
    
 /*Home Page Things~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-
 .cs {
   display: flex;
   flex-direction: row;
@@ -575,6 +575,9 @@ p {
   justify-content: center;
   box-sizing: border-box;
   height: 100%;
+  cursor: pointer; 
+  transition: none; 
+  object-fit: contain;
 }
 
 .home {
@@ -585,13 +588,13 @@ p {
   max-height: 100%;
   max-width: 100%;
   object-fit: contain;
-  transition: transform 0.4s ease;
+  transition: none; /* no hover zoom */
 }
 
-.cs:hover .cs-image img {
-  transform: scale(1.05);
-  margin-top: 0;
-  margin-bottom: 0;
+/* removed hover zooming */
+.cs:hover .cs-image img,
+.cs-image img:hover {
+  transform: none;
 }
 
 .cs-info {
@@ -635,10 +638,48 @@ p {
   background-color: var(--yellow);
   pointer-events: none;
 }
+
 .projects.container {
   display: flex;
   flex-direction: column;
   gap: 24px;
+}
+
+/* lightbox */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.85);
+  z-index: 1000;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.lightbox-img {
+  max-width: 90%;
+  max-height: 90%;
+  object-fit: contain;
+  cursor: default; /* changed from grab */
+  display: block;
+  margin: auto;
+}
+
+.close {
+  position: fixed;
+  top: 24px;
+  right: 32px;
+  font-size: 32px;
+  color: #fff;
+  cursor: pointer;
+  z-index: 1001;
+  font-weight: bold;
+}
+
+.lightbox::-webkit-scrollbar {
+  display: none;
 }
 
 /*---------Case Studies----------*/
