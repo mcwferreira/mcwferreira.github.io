@@ -84,6 +84,7 @@ p {
   padding-left: 120px;
   padding-right: 120px;
   max-width: var(--container);
+  margin-top: 48px;
   margin: 0 auto;
 }
 
@@ -565,7 +566,7 @@ p {
   border-color: var(--smoke);
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
 }
-
+/*
 .cs-image {
   flex: 1;
   display: flex;
@@ -578,20 +579,51 @@ p {
   cursor: pointer; 
   transition: none; 
   object-fit: contain;
+} */
+
+.cs-image {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  height: 800px; 
+  overflow-y: auto; 
+  overflow-x: hidden;
+  cursor: pointer;
+  -webkit-overflow-scrolling: touch;
 }
 
 .home {
   padding: 32px;
 }
-
+ /*
 .cs-image img {
-  max-height: 100%;
+  max-height: 800px;
   max-width: 100%;
   object-fit: contain;
-  transition: none; /* no hover zoom */
+  transition: none; 
+} */
+
+.cs-image img {
+  width: 100%;      
+  height: auto;     
+  max-width: none;  
+  max-height: none;
+  object-fit: cover; 
+  display: block;
 }
 
-/* removed hover zooming */
+.cs-image::-webkit-scrollbar {
+  width: 6px;
+}
+
+.cs-image::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.15);
+  border-radius: 4px;
+}
+
 .cs:hover .cs-image img,
 .cs-image img:hover {
   transform: none;
@@ -645,7 +677,6 @@ p {
   gap: 24px;
 }
 
-/* lightbox */
 .lightbox {
   position: fixed;
   inset: 0;
@@ -681,6 +712,37 @@ p {
 .lightbox::-webkit-scrollbar {
   display: none;
 }
+
+ul.p3 {
+  list-style: none;
+  padding-left: 1.75em;
+  margin: 0;
+}
+
+ul.p3 li {
+  position: relative;
+  padding-left: 0.25em;
+  line-height: 1.6;
+}
+
+ul.p3 li::before {
+  content: "•";
+  position: absolute;
+  left: -1.25em;
+  top: 0.2em;
+  font-size: 0.85em;
+}
+
+h3 + ul.p3 {
+  margin-bottom: 32px;
+}
+
+ul.p3 + h3 {
+  margin-top: 56px;
+}
+
+
+
 
 /*---------Case Studies----------*/
 
@@ -759,6 +821,12 @@ p {
     
   }
 }
+
+.container:nth-child(even) .cs {
+  flex-direction: row-reverse;
+}
+
+
 
 
 /* --- Tablet (≤1000px) --- */
@@ -863,12 +931,23 @@ p {
     margin: 0 auto;
   }
   
-  .cs {
+   .cs {
     flex-direction: column;
     height: auto;
   }
 
+  .cs-image {
+    order: 1;
+    width: 100%;
+  }
+
+  .cs-info {
+    order: 2;
+    width: 100%;
+  }
+}
+
   .cs-image img {
     max-height: 200px;
   }
-}
+
