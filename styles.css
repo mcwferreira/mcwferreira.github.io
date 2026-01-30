@@ -36,6 +36,29 @@ img { max-width: 100%; height: auto; display: block; }
   box-sizing: border-box;
 }
 
+/* Case study lists */
+ul.p3 {
+  list-style-position: inside;   /* pulls bullets into the text block */
+  padding-left: 0;               /* removes default browser indent */
+  margin-left: 0;
+}
+
+ul.p3 li {
+  padding-left: 8px;             /* subtle spacing between bullet and text */
+  margin-bottom: 12px;           /* controls vertical rhythm */
+  line-height: 1.6;
+}
+
+.p3 {
+  list-style-position: inside;
+  padding-left: 0;
+  margin-left: 0;
+}
+
+/* Optional: slightly smaller bullet without shrinking text */
+ul.p3 li::marker {
+  font-size: 0.7em;
+}
 
 
 /* Hero */
@@ -256,6 +279,7 @@ img { max-width: 100%; height: auto; display: block; }
   transition: transform 0.3s ease;
 }
 
+
 .cs-image img {
   width: 100%;
   height: auto;
@@ -273,6 +297,13 @@ img { max-width: 100%; height: auto; display: block; }
   border-color: var(--black);
   color: var(--black);
 }
+
+.cs-image video {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 
 /* STACK IMAGE AND P4 TEXT VERTICALLY IN IMAGE ROWS (case studies) */
 .image-row .cs-image {
