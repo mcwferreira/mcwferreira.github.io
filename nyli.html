@@ -185,9 +185,7 @@ It reinforced that small, continuous design improvements can have an outsized im
     </div>
   </div>
   
-<footer class="site-footer">
-  <p>© 2025 Made by Marcus Ferreira</p>
-</footer>
+<div id="footer"></div>
 
 <script>
   const textObserver = new IntersectionObserver((entries) => {
@@ -309,6 +307,26 @@ const overviewBottom = triggerSection.offsetTop + triggerSection.offsetHeight;
       }
     });
   });
+
+ fetch('footer.html')
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById('footer').innerHTML = html;
+
+      // Copy email handler
+      const copyBtn = document.querySelector('.copy-email');
+      if (copyBtn) {
+        copyBtn.addEventListener('click', () => {
+          const email = copyBtn.dataset.email;
+          navigator.clipboard.writeText(email);
+          copyBtn.textContent = 'Copied!';
+          setTimeout(() => {
+            copyBtn.textContent = 'Copy email';
+          }, 1500);
+        });
+      }
+    });
+    
 </script>
 
 </body>

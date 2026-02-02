@@ -41,9 +41,8 @@
     <div class="intro-text layout-one-col">
       <h1>Hi, I'm Marcus. A product designer from Nashville, TN.</h1>
       <div class="hero-bar"></div>
-      <p>Specializing in crafting strategic UX solutions, I use data-driven insights to create user experiences 
-        that not only perform, but are also enjoyable. As a former landscape architect, 
-        I've learned that whether it's a physical site or a digital site, the secret to success 
+      <p>I create strategic, user-centered digital experiences that connect businesses with their audiences. 
+        A former landscape architect, I've learned that whether it's a physical or digital site, the secret to success 
         is all in the layout.</p>
           </div>
     <div class="profile-img-container" id="profileContainer">
@@ -101,9 +100,7 @@
 
 
 
-  <footer class="site-footer">
-    <p4>© 2025 Made by Marcus Ferreira</p>
-  </footer>
+<div id="footer"></div>
 
   <script>
 
@@ -164,6 +161,44 @@
       }
     }
   });
+  
+  let lastScrollY = window.scrollY;
+const nav = document.querySelector(".top-nav");
+
+window.addEventListener("scroll", () => {
+  const currentScrollY = window.scrollY;
+
+  if (currentScrollY > lastScrollY && currentScrollY > 80) {
+    // scrolling down
+    nav.classList.add("nav-hidden");
+  } else {
+    // scrolling up
+    nav.classList.remove("nav-hidden");
+  }
+
+  lastScrollY = currentScrollY;
+}
+
+);
+
+fetch('footer.html')
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById('footer').innerHTML = html;
+
+      // Copy email handler
+      const copyBtn = document.querySelector('.copy-email');
+      if (copyBtn) {
+        copyBtn.addEventListener('click', () => {
+          const email = copyBtn.dataset.email;
+          navigator.clipboard.writeText(email);
+          copyBtn.textContent = 'Copied!';
+          setTimeout(() => {
+            copyBtn.textContent = 'Copy email';
+          }, 1500);
+        });
+      }
+    });
 
   </script>
 </body>

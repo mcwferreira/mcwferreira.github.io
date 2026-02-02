@@ -189,11 +189,16 @@ ul.p3 li::marker {
 
 /* Top Nav */
 .top-nav {
-  position: fixed; top: 0; left: 0; right: 0; height: 80px;
+  position: fixed; top: 0; left: 0; right: 0; width: 100%; height: 80px;
   -webkit-backdrop-filter: blur(12px); background: var(--bg);
   box-shadow: 0 2px 8px rgba(0,0,0,0.1); z-index: 1001;
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease, background-color 0.3s ease;
 }
+
+.top-nav.nav-hidden {
+  transform: translateY(-100%);
+}
+
 .nav-inner {
   height: 100%;
   display: flex;
@@ -225,6 +230,45 @@ ul.p3 li::marker {
 /* Footer */
 .site-footer { text-align: center; margin-top: 80px; padding: 40px 0; }
 [id] { scroll-margin-top: 100px; }
+
+
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footer-button {
+  display: inline-block;
+  width: fit-content;
+  padding: 12px 20px;
+  border-radius: 999px;
+  border: 1px solid var(--gray1);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.copy-email {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 14px;
+  cursor: pointer;
+  opacity: 0.7;
+  width: fit-content;
+}
+
+.copy-email:hover {
+  opacity: 1;
+}
+
+.footer-meta {
+  font-size: 14px;
+  opacity: 0.6;
+}
+
 
 /* =========================
    CASE STUDIES
