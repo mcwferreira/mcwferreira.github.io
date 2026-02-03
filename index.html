@@ -114,29 +114,9 @@
 
 
 <div id="footer"></div>
-<div class="password-modal" id="passwordModal" aria-hidden="true">
-  <div class="password-modal-content">
-    <h3>Enter password</h3>
-
-    <div class="password-form">
-      <input
-        type="password"
-        id="passwordInput"
-        placeholder="Password"
-        autocomplete="off"
-      />
-      <button id="passwordSubmit">Submit</button>
-    </div>
-
-    <p class="password-error" id="passwordError">
-      Incorrect password
-    </p>
-  </div>
-</div>
-  <script>
 
 
-  // Nav bar
+<script>
   const hamburger = document.getElementById('hamburger');
   const navLinks = document.getElementById('navLinks');
 
@@ -144,7 +124,7 @@
     hamburger.classList.toggle('active');
     navLinks.classList.toggle('show');
   });
-  // Squats
+
   const container = document.getElementById('profileContainer');
   const img = document.getElementById('profileImg');
   const totalFrames = 15;
@@ -152,7 +132,6 @@
   let intervalId = null;
   let isMobileCycling = false;
 
-  // Preload all squat images
   for (let i = 1; i <= totalFrames; i++) {
     const padded = String(i).padStart(2, '0');
     const preloadImg = new Image();
@@ -162,7 +141,7 @@
   function startCycling() {
   if (intervalId) return;
   currentFrame = 1;
-  img.src = `images/squat/01.webp`; // Show first squat image instantly
+  img.src = `images/squat/01.webp`;
   intervalId = setInterval(() => {
     currentFrame = (currentFrame % totalFrames) + 1;
     const padded = String(currentFrame).padStart(2, '0');
@@ -177,11 +156,10 @@
     img.src = 'MF/Me.png';
   }
 
-  // Hover (desktop)
+
   container.addEventListener('mouseenter', startCycling);
   container.addEventListener('mouseleave', stopCycling);
 
-  // Tap (mobile)
   container.addEventListener('click', () => {
     if (window.matchMedia('(hover: none)').matches) {
       isMobileCycling = !isMobileCycling;
@@ -250,8 +228,6 @@ const PASSWORD = "case-study";
       }
     });
   });
-
   </script>
-
 </body>
 </html>
