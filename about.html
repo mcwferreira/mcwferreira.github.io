@@ -16,23 +16,7 @@
     </script>
 </head>
 <body>
-  <nav id="topNav" class="top-nav">
-    <div class="nav-inner">
-      <a href="index.html" class="logo">Marcus Ferreira</a>
-  
-      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-  
-      <div class="nav-links" id="navLinks">
-        <a href="about.html">About</a>
-        <a href="MF/Marcus_Ferreira_Resume.pdf" target="_blank">Resume</a>
-        <a href="https://www.linkedin.com/in/marcuscferreira" target="_blank">LinkedIn</a>
-      </div>
-    </div>
-  </nav>
+  <div id="topnav"></div>
   
 <div class="container">
     <div class="cs-info layout-one-col">
@@ -103,139 +87,123 @@
   </footer>
 
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      // ----- HERO ANIMATIONS -----
-      const heroH1 = document.querySelector('.hero-h1');
-      const heroButton = document.querySelector('.button-hero');
-    
-      if (heroH1) {
-        requestAnimationFrame(() => {
-          heroH1.classList.add('show');
-          setTimeout(() => heroButton?.classList.add('show'), 150);
-        });
-      }
-    
-      // ----- HERO BACKGROUND IMAGE -----
-      document.querySelectorAll('.hero-container').forEach(hero => {
-        const bg = hero.getAttribute('data-bg');
-        if (bg) {
-          const img = new Image();
-          img.src = bg;
-          img.onload = () => {
-            hero.style.backgroundImage = `url(${bg})`;
-            hero.classList.add('bg-loaded');
-          };
-        }
-      });
-    
-      // ----- GENERIC FADE-IN / ANIMATION OBSERVER -----
-      const animateObserver = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('show');
-            animateObserver.unobserve(entry.target); // optional: stop observing once shown
-          }
-        });
-      }, { threshold: 0.2 });
-    
-      document.querySelectorAll('.fade-in, .animate-left').forEach(el => {
-        animateObserver.observe(el);
-      });
-    
-      // ----- STATS COUNTER ANIMATION -----
-      const statsObserver = new IntersectionObserver(entries => {
-        entries.forEach((entry, index) => {
-          if (!entry.isIntersecting) return;
-          const el = entry.target;
-          if (el.dataset.animated === "true") return;
-    
-          el.dataset.animated = "true";
-          el.classList.add('visible');
-    
-          setTimeout(() => {
-            const target = parseFloat(el.dataset.value);
-            let count = 0;
-            const duration = 1200;
-            const steps = 40;
-            const increment = target / steps;
-            const intervalTime = duration / steps;
-    
-            const counter = setInterval(() => {
-              count += increment;
-              if (count >= target) {
-                el.textContent = target.toFixed(1).replace(/\.0$/, '') + (el.dataset.suffix || '');
-                clearInterval(counter);
-              } else {
-                el.textContent = count.toFixed(1).replace(/\.0$/, '') + (el.dataset.suffix || '');
-              }
-            }, intervalTime);
-          }, index * 150);
-    
-          statsObserver.unobserve(el);
-        });
-      }, { threshold: 0.5 });
-    
-      document.querySelectorAll('.stat').forEach(el => statsObserver.observe(el));
-    
-      // ----- SCROLL TO TOP -----
-      window.scrollTo(0, 0);
-    
-      // ----- NAVIGATION + SIDE MENU -----
-      const sideMenu = document.getElementById("sideMenu");
-      const triggerSection = document.querySelector(".text-section-container.two-column");
-      const titles = document.querySelectorAll(".text-section-title");
-      const navLinks = document.querySelectorAll(".nav-link");
-      const topNav = document.getElementById("topNav");
-      const hamburger = document.getElementById("hamburger");
-      const mobileNavLinks = document.getElementById("navLinks");
-    
+/*Nav+footer */
+
+let lastScrollY = window.scrollY;
+
+fetch('nav.html')
+  .then(res => res.text())
+  .then(html => {
+    document.getElementById('nav').innerHTML = html;
+
+    const nav = document.querySelector(".top-nav");
+    const hamburger = document.getElementById("hamburger");
+    const navLinks = document.getElementById("navLinks");
+
+    if (hamburger) {
       hamburger.addEventListener("click", () => {
-      hamburger.classList.toggle("active");
-      mobileNavLinks.classList.toggle("show");
+        navLinks.classList.toggle("show");
       });
+    }
 
-    
-      window.addEventListener("scroll", () => {
-        const top = window.scrollY;
-        const overviewBottom = triggerSection.offsetTop + triggerSection.offsetHeight;
-    
-        topNav.classList.toggle("scrolled", top > 10);
-        sideMenu.style.display = top > overviewBottom ? "block" : "none";
-    
-        titles.forEach(title => {
-          const rect = title.getBoundingClientRect();
-          if (rect.top < window.innerHeight - 100) title.classList.add("visible");
-        });
-    
-        navLinks.forEach(link => {
-          const section = document.querySelector(link.getAttribute("href"));
-          if (section && top >= section.offsetTop - 140 && top < section.offsetTop + section.offsetHeight - 140) {
-            link.classList.add("active");
-          } else {
-            link.classList.remove("active");
-          }
-        });
-      });
-    });
+    window.addEventListener("scroll", () => {
+      const currentScrollY = window.scrollY;
 
-    fetch('footer.html')
-    .then(res => res.text())
-    .then(html => {
-      document.getElementById('footer').innerHTML = html;
-
-      const copyBtn = document.querySelector('.copy-email');
-      if (copyBtn) {
-        copyBtn.addEventListener('click', () => {
-          const email = copyBtn.dataset.email;
-          navigator.clipboard.writeText(email);
-          copyBtn.textContent = 'Copied!';
-          setTimeout(() => {
-            copyBtn.textContent = 'Copy email';
-          }, 1500);
-        });
+      if (currentScrollY > lastScrollY && currentScrollY > 80) {
+        nav.classList.add("nav-hidden");
+      } else {
+        nav.classList.remove("nav-hidden");
       }
+
+      lastScrollY = currentScrollY;
     });
-    </script>
+  });
+
+fetch('footer.html')
+  .then(res => res.text())
+  .then(html => {
+    document.getElementById('footer').innerHTML = html;
+
+    const copyBtn = document.querySelector('.copy-email');
+    if (copyBtn) {
+      copyBtn.addEventListener('click', () => {
+        navigator.clipboard.writeText(copyBtn.dataset.email);
+        copyBtn.textContent = 'Copied!';
+        setTimeout(() => copyBtn.textContent = 'Copy email', 1500);
+      });
+    }
+  });
+
+/*Squats */
+
+const container = document.getElementById('profileContainer');
+const img = document.getElementById('profileImg');
+const totalFrames = 15;
+let currentFrame = 1;
+let intervalId = null;
+let isMobileCycling = false;
+
+for (let i = 1; i <= totalFrames; i++) {
+  const padded = String(i).padStart(2, '0');
+  const preloadImg = new Image();
+  preloadImg.src = `images/squat/${padded}.webp`;
+}
+
+function startCycling() {
+  if (intervalId) return;
+  currentFrame = 1;
+  img.src = `images/squat/01.webp`;
+  intervalId = setInterval(() => {
+    currentFrame = (currentFrame % totalFrames) + 1;
+    img.src = `images/squat/${String(currentFrame).padStart(2, '0')}.webp`;
+  }, 700);
+}
+
+function stopCycling() {
+  clearInterval(intervalId);
+  intervalId = null;
+  img.src = 'MF/Me.png';
+}
+
+container.addEventListener('mouseenter', startCycling);
+container.addEventListener('mouseleave', stopCycling);
+
+container.addEventListener('click', () => {
+  if (window.matchMedia('(hover: none)').matches) {
+    isMobileCycling = !isMobileCycling;
+    isMobileCycling ? startCycling() : stopCycling();
+  }
+});
+
+/*Password*/
+
+const PASSWORD = "case-study";
+
+document.querySelectorAll(".locked-cs").forEach(card => {
+  const overlay = card.querySelector(".cs-password-overlay");
+  const input = card.querySelector("input");
+  const button = card.querySelector("button");
+  const error = card.querySelector(".password-error");
+  const target = card.dataset.target;
+
+  card.addEventListener("click", e => {
+    e.preventDefault();
+    card.classList.add("show-password");
+    input.focus();
+  });
+
+  overlay.addEventListener("click", e => e.stopPropagation());
+
+  button.addEventListener("click", e => {
+    e.stopPropagation();
+    if (input.value === PASSWORD) {
+      window.location.href = target;
+    } else {
+      error.style.display = "block";
+    }
+  });
+});
+</script>
     
   
   
