@@ -180,12 +180,10 @@ It reinforced that small, continuous design improvements can have an outsized im
 <script>
 document.addEventListener('DOMContentLoaded', () => {
 
-  /*hero bg*/
-
+  /*Hero*/
   document.querySelectorAll('.hero-container').forEach(hero => {
     const bg = hero.getAttribute('data-bg');
     if (!bg) return;
-
     const img = new Image();
     img.src = bg;
     img.onload = () => {
@@ -194,134 +192,138 @@ document.addEventListener('DOMContentLoaded', () => {
     };
   });
 
-  /*hero animations */
-
-  const heroH1 = document.querySelector('.hero-h1');
-  const heroButton = document.querySelector('.button-hero');
-
-  if (heroH1) {
-    requestAnimationFrame(() => {
-      heroH1.classList.add('show');
-      setTimeout(() => heroButton?.classList.add('show'), 150);
+  requestAnimationFrame(() => {
+    document.querySelectorAll('.hero-h1, .button-hero').forEach(el => {
+      el.classList.add('show');
     });
-  }
+  });
 
-  /*fade animations*/
-
-  const observer = new IntersectionObserver(entries => {
+  /*Slides*/
+  const animateObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('show');
-        observer.unobserve(entry.target);
+        animateObserver.unobserve(entry.target);
       }
     });
   }, { threshold: 0.2 });
 
-  document.querySelectorAll('.fade-in, .animate-left').forEach(el => observer.observe(el));
+  document.querySelectorAll('.fade-in, .animate-left').forEach(el => {
+    animateObserver.observe(el);
+  });
 
-  /*stats*/
+  /*Stats*/
+  function initStats() {
+    const stats = document.querySelectorAll('.stat');
+    if (!stats.length) return;
 
-  const statsObserver = new IntersectionObserver(entries => {
-    entries.forEach((entry, index) => {
-      if (!entry.isIntersecting) return;
+    stats.forEach(stat => {
+      stat.textContent = '0' + (stat.dataset.suffix || '');
+      stat.dataset.animated = 'false';
+    });
 
-      const el = entry.target;
-      if (el.dataset.animated) return;
-      el.dataset.animated = "true";
+    const statsObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        if (el.dataset.animated === 'true') return;
 
-      const target = parseFloat(el.dataset.value);
-      const suffix = el.dataset.suffix || "";
-      let count = 0;
-      const steps = 40;
-      const increment = target / steps;
+        el.dataset.animated = 'true';
+        const target = parseFloat(el.dataset.value);
+        const suffix = el.dataset.suffix || '';
+        let current = 0;
+        const steps = 40;
+        const increment = target / steps;
 
-      setTimeout(() => {
         const counter = setInterval(() => {
-          count += increment;
-          if (count >= target) {
+          current += increment;
+          if (current >= target) {
             el.textContent = target + suffix;
             clearInterval(counter);
           } else {
-            el.textContent = count.toFixed(1).replace(/\.0$/, '') + suffix;
+            el.textContent = current.toFixed(1).replace(/\.0$/, '') + suffix;
           }
         }, 30);
-      }, index * 150);
 
-      statsObserver.unobserve(el);
-    });
-  }, { threshold: 0.5 });
+        statsObserver.unobserve(el);
+      });
+    }, { threshold: 0.3 });
 
-  document.querySelectorAll('.stat').forEach(el => statsObserver.observe(el));
-
-  /*lightbox*/
-
-  const lightbox = document.createElement("div");
-  lightbox.className = "lightbox";
-  lightbox.innerHTML = `<span class="close">&times;</span><img class="lightbox-img" />`;
-  document.body.appendChild(lightbox);
-
-  const lightboxImg = lightbox.querySelector(".lightbox-img");
-  const closeBtn = lightbox.querySelector(".close");
-
-  document.querySelectorAll(".cs-image img, .fullscreen-image").forEach(img => {
-    img.addEventListener("click", () => {
-      lightboxImg.src = img.src;
-      lightbox.style.display = "flex";
-      document.body.style.overflow = "hidden";
-    });
-  });
-
-  function closeLightbox() {
-    lightbox.style.display = "none";
-    lightboxImg.src = "";
-    document.body.style.overflow = "";
+    stats.forEach(stat => statsObserver.observe(stat));
   }
 
-  closeBtn.addEventListener("click", closeLightbox);
-  lightbox.addEventListener("click", e => e.target === lightbox && closeLightbox());
-  document.addEventListener("keydown", e => e.key === "Escape" && closeLightbox());
-});
+  /*Lightbox*/
+  const lightbox = document.createElement('div');
+  lightbox.className = 'lightbox';
+  lightbox.innerHTML = `
+    <span class="close">&times;</span>
+    <img class="lightbox-img" />
+  `;
+  document.body.appendChild(lightbox);
 
-/*nav+footer */
+  const lightboxImg = lightbox.querySelector('.lightbox-img');
 
-let lastScrollY = window.scrollY;
-
-fetch('nav.html')
-  .then(res => res.text())
-  .then(html => {
-    document.getElementById('nav').innerHTML = html;
-
-    const nav = document.querySelector(".top-nav");
-    const hamburger = document.getElementById("hamburger");
-    const navLinks = document.getElementById("navLinks");
-
-    if (hamburger) {
-      hamburger.addEventListener("click", () => {
-        navLinks.classList.toggle("show");
-      });
-    }
-
-    window.addEventListener("scroll", () => {
-      const currentScrollY = window.scrollY;
-      nav.classList.toggle("nav-hidden", currentScrollY > lastScrollY && currentScrollY > 80);
-      lastScrollY = currentScrollY;
+  document.querySelectorAll('.cs-image img, .fullscreen-image').forEach(img => {
+    img.addEventListener('click', () => {
+      lightboxImg.src = img.src;
+      lightbox.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
     });
   });
 
-fetch('footer.html')
-  .then(res => res.text())
-  .then(html => {
-    document.getElementById('footer').innerHTML = html;
-
-    const copyBtn = document.querySelector('.copy-email');
-    if (copyBtn) {
-      copyBtn.addEventListener('click', () => {
-        navigator.clipboard.writeText(copyBtn.dataset.email);
-        copyBtn.textContent = 'Copied!';
-        setTimeout(() => copyBtn.textContent = 'Copy email', 1500);
-      });
+  lightbox.addEventListener('click', e => {
+    if (e.target === lightbox || e.target.classList.contains('close')) {
+      lightbox.style.display = 'none';
+      document.body.style.overflow = '';
     }
   });
+
+  /*Footer*/
+  fetch('footer.html')
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById('footer').innerHTML = html;
+
+      const copyBtn = document.querySelector('.copy-email');
+      if (copyBtn) {
+        copyBtn.addEventListener('click', () => {
+          navigator.clipboard.writeText(copyBtn.dataset.email);
+          copyBtn.textContent = 'Copied!';
+          setTimeout(() => copyBtn.textContent = 'Copy email', 1500);
+        });
+      }
+    });
+
+  /* Nav */
+  fetch('nav.html')
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById('nav').innerHTML = html;
+
+      const topNav = document.getElementById('topNav');
+      const hamburger = document.getElementById('hamburger');
+      const navLinks = document.getElementById('navLinks');
+
+      if (hamburger && navLinks) {
+        hamburger.addEventListener('click', () => {
+          navLinks.classList.toggle('show');
+        });
+      }
+
+      let lastScroll = 0;
+      window.addEventListener('scroll', () => {
+        const current = window.scrollY;
+        if (!topNav) return;
+
+        topNav.classList.toggle('scrolled', current > 10);
+        topNav.classList.toggle('nav-hidden', current > lastScroll && current > 120);
+        lastScroll = current;
+      });
+
+      initStats();
+    });
+
+});
 </script>
 
 </body>
