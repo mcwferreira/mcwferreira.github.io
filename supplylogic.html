@@ -237,8 +237,63 @@
 <div id="footer"></div>
 
 <script>
+  
 document.addEventListener('DOMContentLoaded', () => {
 
+  /*Nav+footer */
+let lastScrollY = window.scrollY;
+
+fetch('nav.html')
+  .then(res => res.text())
+  .then(html => {
+    const navMount = document.getElementById('nav');
+    if (!navMount) return;
+
+    navMount.innerHTML = html;
+
+    const topNav =
+      document.getElementById('topNav') ||
+      document.querySelector('.top-nav') ||
+      navMount.querySelector('nav');
+
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+
+    if (hamburger && navLinks) {
+      hamburger.addEventListener('click', () => {
+        navLinks.classList.toggle('show');
+      });
+    }
+
+    if (!topNav) return;
+
+    window.addEventListener('scroll', () => {
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY > lastScrollY && currentScrollY > 80) {
+        topNav.classList.add('nav-hidden');
+      } else {
+        topNav.classList.remove('nav-hidden');
+      }
+
+      lastScrollY = currentScrollY;
+    });
+  });
+
+  fetch('footer.html')
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById('footer').innerHTML = html;
+
+      const copyBtn = document.querySelector('.copy-email');
+      if (copyBtn) {
+        copyBtn.addEventListener('click', () => {
+          navigator.clipboard.writeText(copyBtn.dataset.email);
+          copyBtn.textContent = 'Copied!';
+          setTimeout(() => copyBtn.textContent = 'Copy email', 1500);
+        });
+      }
+    });
   /*Hero*/
   document.querySelectorAll('.hero-container').forEach(hero => {
     const bg = hero.getAttribute('data-bg');
@@ -336,52 +391,6 @@ document.addEventListener('DOMContentLoaded', () => {
       document.body.style.overflow = '';
     }
   });
-
-  /*Footer*/
-  fetch('footer.html')
-    .then(res => res.text())
-    .then(html => {
-      document.getElementById('footer').innerHTML = html;
-
-      const copyBtn = document.querySelector('.copy-email');
-      if (copyBtn) {
-        copyBtn.addEventListener('click', () => {
-          navigator.clipboard.writeText(copyBtn.dataset.email);
-          copyBtn.textContent = 'Copied!';
-          setTimeout(() => copyBtn.textContent = 'Copy email', 1500);
-        });
-      }
-    });
-
-  /* Nav */
-  fetch('nav.html')
-    .then(res => res.text())
-    .then(html => {
-      document.getElementById('nav').innerHTML = html;
-
-      const topNav = document.getElementById('topNav');
-      const hamburger = document.getElementById('hamburger');
-      const navLinks = document.getElementById('navLinks');
-
-      if (hamburger && navLinks) {
-        hamburger.addEventListener('click', () => {
-          navLinks.classList.toggle('show');
-        });
-      }
-
-      let lastScroll = 0;
-      window.addEventListener('scroll', () => {
-        const current = window.scrollY;
-        if (!topNav) return;
-
-        topNav.classList.toggle('scrolled', current > 10);
-        topNav.classList.toggle('nav-hidden', current > lastScroll && current > 120);
-        lastScroll = current;
-      });
-
-      initStats();
-    });
-
 });
 </script>
 </body>
