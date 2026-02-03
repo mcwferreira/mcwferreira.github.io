@@ -141,6 +141,20 @@ fetch('nav.html')
     });
   });
 
+  fetch('footer.html')
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById('footer').innerHTML = html;
+
+      const copyBtn = document.querySelector('.copy-email');
+      if (copyBtn) {
+        copyBtn.addEventListener('click', () => {
+          navigator.clipboard.writeText(copyBtn.dataset.email);
+          copyBtn.textContent = 'Copied!';
+          setTimeout(() => copyBtn.textContent = 'Copy email', 1500);
+        });
+      }
+    });
 
 /*Squats */
 
