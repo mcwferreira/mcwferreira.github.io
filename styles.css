@@ -392,78 +392,67 @@ ul.p3 li::marker {
   margin: 0; /* reset any weird spacing */
 }
 
-.password-modal {
-  position: fixed;
+.cs {
+  position: relative;
+}
+
+/* Overlay */
+.cs-password-overlay {
+  position: absolute;
   inset: 0;
   background: rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(10px);
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-  z-index: 9999;
+  z-index: 5;
 }
 
-.password-modal.show {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.password-modal-content {
-  background: #111;
-  padding: 32px;
+/* Modal */
+.cs-password-modal {
+  background: white;
+  padding: 20px 24px;
   border-radius: 16px;
-  width: 100%;
-  max-width: 360px;
+  width: 80%;
+  max-width: 320px;
   text-align: center;
 }
 
-.password-modal-content h3 {
-  margin-bottom: 16px;
-}
-
-.password-form {
+/* Input row */
+.password-row {
   display: flex;
   gap: 8px;
+  margin-top: 12px;
 }
 
-.password-form input {
+.password-row input {
   flex: 1;
-  padding: 10px 12px;
+  padding: 10px;
   border-radius: 8px;
-  border: none;
-  background: #fff;
-  color: #000;
-  font-size: 14px;
+  border: 1px solid var(--gray1);
 }
 
-.password-form button {
-  padding: 10px 16px;
+.password-row button {
+  padding: 10px 14px;
   border-radius: 8px;
   border: none;
+  background: black;
+  color: white;
   cursor: pointer;
 }
 
 .password-error {
-  color: #ff6b6b;
-  font-size: 13px;
-  margin-top: 12px;
   display: none;
+  margin-top: 8px;
+  color: red;
+  font-size: 13px;
 }
 
-/* Mobile */
-@media (max-width: 480px) {
-  .password-modal-content {
-    margin: 0 16px;
-    padding: 24px;
-  }
-
-  .password-form {
-    flex-direction: column;
-  }
+/* Show state */
+.cs.show-password .cs-password-overlay {
+  display: flex;
 }
+
 
 /* Desktop Nav */
 @media (min-width: 768px) {

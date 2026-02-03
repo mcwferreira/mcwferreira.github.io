@@ -86,6 +86,7 @@
     <div class="cs-image">
       <img src="images/nyli/NYLIThumbnail.webp" alt="NYLI Thumbnail" />
     </div>
+
     <div class="cs-info layout-one-col">
       <h2 class="cs-title">New York Life Investments</h2>
       <p class="cs-subtext">Financial Services | CMS | Enterprise</p>
@@ -96,6 +97,18 @@
         <span class="button">READ CASE STUDY</span>
       </div>
     </div>
+
+    <div class="cs-password-overlay">
+      <div class="cs-password-modal">
+        <p class="p2 bold">Enter password</p>
+        <div class="password-row">
+          <input type="password" placeholder="Password" />
+          <button type="button">Submit</button>
+        </div>
+        <p class="password-error">Incorrect password</p>
+      </div>
+    </div>
+
   </a>
 </div>
 
@@ -213,46 +226,30 @@ fetch('footer.html')
       }
     });
 
-const LOCKED_PASSWORD = "case-study"; // typical + generic
-  const ACCESS_KEY = "nyli-unlocked";
-
-  const modal = document.getElementById("passwordModal");
-  const input = document.getElementById("passwordInput");
-  const submit = document.getElementById("passwordSubmit");
-  const error = document.getElementById("passwordError");
-
-  let targetUrl = "";
+const PASSWORD = "case-study";
 
   document.querySelectorAll(".locked-cs").forEach(card => {
+    const overlay = card.querySelector(".cs-password-overlay");
+    const input = card.querySelector("input");
+    const button = card.querySelector("button");
+    const error = card.querySelector(".password-error");
+    const target = card.dataset.target;
+
     card.addEventListener("click", e => {
       e.preventDefault();
-
-      targetUrl = card.dataset.target;
-
-      if (sessionStorage.getItem(ACCESS_KEY) === "true") {
-        window.location.href = targetUrl;
-        return;
-      }
-
-      modal.classList.add("show");
+      card.classList.add("show-password");
       input.focus();
     });
-  });
 
-  submit.addEventListener("click", tryUnlock);
-  input.addEventListener("keydown", e => {
-    if (e.key === "Enter") tryUnlock();
+    button.addEventListener("click", e => {
+      e.stopPropagation();
+      if (input.value === PASSWORD) {
+        window.location.href = target;
+      } else {
+        error.style.display = "block";
+      }
+    });
   });
-
-  function tryUnlock() {
-    if (input.value === LOCKED_PASSWORD) {
-      sessionStorage.setItem(ACCESS_KEY, "true");
-      window.location.href = targetUrl;
-    } else {
-      error.style.display = "block";
-      input.value = "";
-    }
-  }
 
   </script>
 
