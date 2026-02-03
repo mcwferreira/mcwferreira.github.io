@@ -18,7 +18,7 @@
 </head>
 
 <body>
- <div id="topnav"></div>
+ <div id="nav"></div>
   
   <header class="hero container">
     <div class="intro-text layout-one-col">
@@ -102,51 +102,45 @@
 
 <script>
 /*Nav+footer */
-
 let lastScrollY = window.scrollY;
 
 fetch('nav.html')
   .then(res => res.text())
   .then(html => {
-    document.getElementById('nav').innerHTML = html;
+    const navMount = document.getElementById('nav');
+    if (!navMount) return;
 
-    const nav = document.querySelector(".top-nav");
-    const hamburger = document.getElementById("hamburger");
-    const navLinks = document.getElementById("navLinks");
+    navMount.innerHTML = html;
 
-    if (hamburger) {
-      hamburger.addEventListener("click", () => {
-        navLinks.classList.toggle("show");
+    const topNav =
+      document.getElementById('topNav') ||
+      document.querySelector('.top-nav') ||
+      navMount.querySelector('nav');
+
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+
+    if (hamburger && navLinks) {
+      hamburger.addEventListener('click', () => {
+        navLinks.classList.toggle('show');
       });
     }
 
-    window.addEventListener("scroll", () => {
+    if (!topNav) return;
+
+    window.addEventListener('scroll', () => {
       const currentScrollY = window.scrollY;
 
       if (currentScrollY > lastScrollY && currentScrollY > 80) {
-        nav.classList.add("nav-hidden");
+        topNav.classList.add('nav-hidden');
       } else {
-        nav.classList.remove("nav-hidden");
+        topNav.classList.remove('nav-hidden');
       }
 
       lastScrollY = currentScrollY;
     });
   });
 
-fetch('footer.html')
-  .then(res => res.text())
-  .then(html => {
-    document.getElementById('footer').innerHTML = html;
-
-    const copyBtn = document.querySelector('.copy-email');
-    if (copyBtn) {
-      copyBtn.addEventListener('click', () => {
-        navigator.clipboard.writeText(copyBtn.dataset.email);
-        copyBtn.textContent = 'Copied!';
-        setTimeout(() => copyBtn.textContent = 'Copy email', 1500);
-      });
-    }
-  });
 
 /*Squats */
 
