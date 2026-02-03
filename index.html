@@ -7,7 +7,6 @@
   <link rel="stylesheet" href="styles-old.css" />
   <link rel="stylesheet" href="styles.css" />
 
-  <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-B6T3E7G06M"></script>
   <script>
   window.dataLayer = window.dataLayer || [];
@@ -83,14 +82,16 @@
 </div>
 
 <div class="container cs-container">
-  <a href="nyli.html" class="cs">
+  <a href="#" class="cs locked-cs" data-target="nyli.html">
     <div class="cs-image">
       <img src="images/nyli/NYLIThumbnail.webp" alt="NYLI Thumbnail" />
     </div>
     <div class="cs-info layout-one-col">
       <h2 class="cs-title">New York Life Investments</h2>
       <p class="cs-subtext">Financial Services | CMS | Enterprise</p>
-      <p class="cs-description">Financial enterprise platform using AEM and a shared design system.</p>
+      <p class="cs-description">
+        Financial enterprise platform using AEM and a shared design system.
+      </p>
       <div class="button-wrapper">
         <span class="button">READ CASE STUDY</span>
       </div>
@@ -99,9 +100,26 @@
 </div>
 
 
-
 <div id="footer"></div>
+<div class="password-modal" id="passwordModal" aria-hidden="true">
+  <div class="password-modal-content">
+    <h3>Enter password</h3>
 
+    <div class="password-form">
+      <input
+        type="password"
+        id="passwordInput"
+        placeholder="Password"
+        autocomplete="off"
+      />
+      <button id="passwordSubmit">Submit</button>
+    </div>
+
+    <p class="password-error" id="passwordError">
+      Incorrect password
+    </p>
+  </div>
+</div>
   <script>
 
 
@@ -169,17 +187,13 @@ window.addEventListener("scroll", () => {
   const currentScrollY = window.scrollY;
 
   if (currentScrollY > lastScrollY && currentScrollY > 80) {
-    // scrolling down
     nav.classList.add("nav-hidden");
   } else {
-    // scrolling up
     nav.classList.remove("nav-hidden");
   }
 
   lastScrollY = currentScrollY;
-}
-
-);
+});
 
 fetch('footer.html')
     .then(res => res.text())
@@ -199,6 +213,48 @@ fetch('footer.html')
       }
     });
 
+const LOCKED_PASSWORD = "case-study"; // typical + generic
+  const ACCESS_KEY = "nyli-unlocked";
+
+  const modal = document.getElementById("passwordModal");
+  const input = document.getElementById("passwordInput");
+  const submit = document.getElementById("passwordSubmit");
+  const error = document.getElementById("passwordError");
+
+  let targetUrl = "";
+
+  document.querySelectorAll(".locked-cs").forEach(card => {
+    card.addEventListener("click", e => {
+      e.preventDefault();
+
+      targetUrl = card.dataset.target;
+
+      if (sessionStorage.getItem(ACCESS_KEY) === "true") {
+        window.location.href = targetUrl;
+        return;
+      }
+
+      modal.classList.add("show");
+      input.focus();
+    });
+  });
+
+  submit.addEventListener("click", tryUnlock);
+  input.addEventListener("keydown", e => {
+    if (e.key === "Enter") tryUnlock();
+  });
+
+  function tryUnlock() {
+    if (input.value === LOCKED_PASSWORD) {
+      sessionStorage.setItem(ACCESS_KEY, "true");
+      window.location.href = targetUrl;
+    } else {
+      error.style.display = "block";
+      input.value = "";
+    }
+  }
+
   </script>
+
 </body>
 </html>

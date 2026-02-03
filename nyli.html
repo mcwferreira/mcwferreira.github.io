@@ -327,6 +327,9 @@ const overviewBottom = triggerSection.offsetTop + triggerSection.offsetHeight;
       }
     });
     
+     if (sessionStorage.getItem("nyli-unlocked") !== "true") {
+    window.location.href = "home.html";
+  }
 </script>
 
 </body>
