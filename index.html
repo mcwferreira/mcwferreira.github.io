@@ -18,23 +18,7 @@
 </head>
 
 <body>
-  <nav id="topNav" class="top-nav">
-    <div class="nav-inner">
-      <a href="index.html" class="logo">Marcus Ferreira</a>
-  
-      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-  
-      <div class="nav-links" id="navLinks">
-        <a href="about.html">About</a>
-        <a href="MF/Marcus_Ferreira_Resume.pdf" target="_blank">Resume</a>
-        <a href="https://www.linkedin.com/in/marcuscferreira" target="_blank">LinkedIn</a>
-      </div>
-    </div>
-  </nav>
+ <div id="nav"></div>
   
   <header class="hero container">
     <div class="intro-text layout-one-col">
@@ -43,7 +27,7 @@
       <p>I create strategic, user-centered digital experiences that connect businesses with their audiences. 
         A former landscape architect, I've learned that whether it's a physical or digital site, the secret to success 
         is all in the layout.</p>
-          </div>
+    </div>
     <div class="profile-img-container" id="profileContainer">
         <img class="profile-img" id="profileImg" src="MF/Me.png" alt="Profile" />
     </div>
@@ -117,117 +101,123 @@
 
 
 <script>
-  const hamburger = document.getElementById('hamburger');
-  const navLinks = document.getElementById('navLinks');
+/*Nav+footer */
 
-  hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('active');
-    navLinks.classList.toggle('show');
+let lastScrollY = window.scrollY;
+
+fetch('nav.html')
+  .then(res => res.text())
+  .then(html => {
+    document.getElementById('nav').innerHTML = html;
+
+    const nav = document.querySelector(".top-nav");
+    const hamburger = document.getElementById("hamburger");
+    const navLinks = document.getElementById("navLinks");
+
+    if (hamburger) {
+      hamburger.addEventListener("click", () => {
+        navLinks.classList.toggle("show");
+      });
+    }
+
+    window.addEventListener("scroll", () => {
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY > lastScrollY && currentScrollY > 80) {
+        nav.classList.add("nav-hidden");
+      } else {
+        nav.classList.remove("nav-hidden");
+      }
+
+      lastScrollY = currentScrollY;
+    });
   });
 
-  const container = document.getElementById('profileContainer');
-  const img = document.getElementById('profileImg');
-  const totalFrames = 15;
-  let currentFrame = 1;
-  let intervalId = null;
-  let isMobileCycling = false;
+fetch('footer.html')
+  .then(res => res.text())
+  .then(html => {
+    document.getElementById('footer').innerHTML = html;
 
-  for (let i = 1; i <= totalFrames; i++) {
-    const padded = String(i).padStart(2, '0');
-    const preloadImg = new Image();
-    preloadImg.src = `images/squat/${padded}.webp`;
-  }
+    const copyBtn = document.querySelector('.copy-email');
+    if (copyBtn) {
+      copyBtn.addEventListener('click', () => {
+        navigator.clipboard.writeText(copyBtn.dataset.email);
+        copyBtn.textContent = 'Copied!';
+        setTimeout(() => copyBtn.textContent = 'Copy email', 1500);
+      });
+    }
+  });
 
-  function startCycling() {
+/*Squats */
+
+const container = document.getElementById('profileContainer');
+const img = document.getElementById('profileImg');
+const totalFrames = 15;
+let currentFrame = 1;
+let intervalId = null;
+let isMobileCycling = false;
+
+for (let i = 1; i <= totalFrames; i++) {
+  const padded = String(i).padStart(2, '0');
+  const preloadImg = new Image();
+  preloadImg.src = `images/squat/${padded}.webp`;
+}
+
+function startCycling() {
   if (intervalId) return;
   currentFrame = 1;
   img.src = `images/squat/01.webp`;
   intervalId = setInterval(() => {
     currentFrame = (currentFrame % totalFrames) + 1;
-    const padded = String(currentFrame).padStart(2, '0');
-    img.src = `images/squat/${padded}.webp`;
+    img.src = `images/squat/${String(currentFrame).padStart(2, '0')}.webp`;
   }, 700);
+}
+
+function stopCycling() {
+  clearInterval(intervalId);
+  intervalId = null;
+  img.src = 'MF/Me.png';
+}
+
+container.addEventListener('mouseenter', startCycling);
+container.addEventListener('mouseleave', stopCycling);
+
+container.addEventListener('click', () => {
+  if (window.matchMedia('(hover: none)').matches) {
+    isMobileCycling = !isMobileCycling;
+    isMobileCycling ? startCycling() : stopCycling();
   }
-
-  function stopCycling() {
-    clearInterval(intervalId);
-    intervalId = null;
-    currentFrame = 1;
-    img.src = 'MF/Me.png';
-  }
-
-
-  container.addEventListener('mouseenter', startCycling);
-  container.addEventListener('mouseleave', stopCycling);
-
-  container.addEventListener('click', () => {
-    if (window.matchMedia('(hover: none)').matches) {
-      isMobileCycling = !isMobileCycling;
-      if (isMobileCycling) {
-        startCycling();
-      } else {
-        stopCycling();
-      }
-    }
-  });
-  
-  let lastScrollY = window.scrollY;
-const nav = document.querySelector(".top-nav");
-
-window.addEventListener("scroll", () => {
-  const currentScrollY = window.scrollY;
-
-  if (currentScrollY > lastScrollY && currentScrollY > 80) {
-    nav.classList.add("nav-hidden");
-  } else {
-    nav.classList.remove("nav-hidden");
-  }
-
-  lastScrollY = currentScrollY;
 });
 
-fetch('footer.html')
-    .then(res => res.text())
-    .then(html => {
-      document.getElementById('footer').innerHTML = html;
-
-      const copyBtn = document.querySelector('.copy-email');
-      if (copyBtn) {
-        copyBtn.addEventListener('click', () => {
-          const email = copyBtn.dataset.email;
-          navigator.clipboard.writeText(email);
-          copyBtn.textContent = 'Copied!';
-          setTimeout(() => {
-            copyBtn.textContent = 'Copy email';
-          }, 1500);
-        });
-      }
-    });
+/*Password*/
 
 const PASSWORD = "case-study";
 
-  document.querySelectorAll(".locked-cs").forEach(card => {
-    const overlay = card.querySelector(".cs-password-overlay");
-    const input = card.querySelector("input");
-    const button = card.querySelector("button");
-    const error = card.querySelector(".password-error");
-    const target = card.dataset.target;
+document.querySelectorAll(".locked-cs").forEach(card => {
+  const overlay = card.querySelector(".cs-password-overlay");
+  const input = card.querySelector("input");
+  const button = card.querySelector("button");
+  const error = card.querySelector(".password-error");
+  const target = card.dataset.target;
 
-    card.addEventListener("click", e => {
-      e.preventDefault();
-      card.classList.add("show-password");
-      input.focus();
-    });
-
-    button.addEventListener("click", e => {
-      e.stopPropagation();
-      if (input.value === PASSWORD) {
-        window.location.href = target;
-      } else {
-        error.style.display = "block";
-      }
-    });
+  card.addEventListener("click", e => {
+    e.preventDefault();
+    card.classList.add("show-password");
+    input.focus();
   });
-  </script>
+
+  overlay.addEventListener("click", e => e.stopPropagation());
+
+  button.addEventListener("click", e => {
+    e.stopPropagation();
+    if (input.value === PASSWORD) {
+      window.location.href = target;
+    } else {
+      error.style.display = "block";
+    }
+  });
+});
+</script>
+
 </body>
 </html>

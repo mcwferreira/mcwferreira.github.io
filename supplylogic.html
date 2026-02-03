@@ -17,18 +17,7 @@
 
 <body>
 
-<!-- NAV -->
-<nav class="top-nav">
-  <div class="nav-inner">
-    <a href="home.html" class="logo">Marcus Ferreira</a>
-    <div class="nav-links" id="navLinks">
-      <a href="about.html">About</a>
-      <a href="MF/Marcus_ferreira_resume.pdf">Resume</a>
-      <a href="https://www.linkedin.com/in/marcuscferreira">LinkedIn</a>
-    </div>
-    <button class="hamburger" id="hamburger">&#9776;</button>
-  </div>
-</nav>
+<div id="nav"></div>
 
 <!-- HERO -->
 <header class="hero-container" data-bg="images/supplylogic/supplylogic-bg.webp">
@@ -249,36 +238,150 @@
 
 <!-- MOBILE NAV -->
 <script>
-  const hamburger = document.getElementById("hamburger");
-  const mobileNavLinks = document.getElementById("navLinks");
+document.addEventListener('DOMContentLoaded', () => {
 
-  hamburger.addEventListener("click", () => {
-    mobileNavLinks.classList.toggle("show");
-  });
+  /*hero bg*/
 
   document.querySelectorAll('.hero-container').forEach(hero => {
     const bg = hero.getAttribute('data-bg');
-    if (bg) hero.style.backgroundImage = `url(${bg})`;
+    if (!bg) return;
+
+    const img = new Image();
+    img.src = bg;
+    img.onload = () => {
+      hero.style.backgroundImage = `url(${bg})`;
+      hero.classList.add('bg-loaded');
+    };
   });
 
-  fetch('footer.html')
-    .then(res => res.text())
-    .then(html => {
-      document.getElementById('footer').innerHTML = html;
+  /*hero animations */
 
-      // Copy email handler
-      const copyBtn = document.querySelector('.copy-email');
-      if (copyBtn) {
-        copyBtn.addEventListener('click', () => {
-          const email = copyBtn.dataset.email;
-          navigator.clipboard.writeText(email);
-          copyBtn.textContent = 'Copied!';
-          setTimeout(() => {
-            copyBtn.textContent = 'Copy email';
-          }, 1500);
-        });
+  const heroH1 = document.querySelector('.hero-h1');
+  const heroButton = document.querySelector('.button-hero');
+
+  if (heroH1) {
+    requestAnimationFrame(() => {
+      heroH1.classList.add('show');
+      setTimeout(() => heroButton?.classList.add('show'), 150);
+    });
+  }
+
+  /*fade animations*/
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('show');
+        observer.unobserve(entry.target);
       }
     });
+  }, { threshold: 0.2 });
+
+  document.querySelectorAll('.fade-in, .animate-left').forEach(el => observer.observe(el));
+
+  /*stats*/
+
+  const statsObserver = new IntersectionObserver(entries => {
+    entries.forEach((entry, index) => {
+      if (!entry.isIntersecting) return;
+
+      const el = entry.target;
+      if (el.dataset.animated) return;
+      el.dataset.animated = "true";
+
+      const target = parseFloat(el.dataset.value);
+      const suffix = el.dataset.suffix || "";
+      let count = 0;
+      const steps = 40;
+      const increment = target / steps;
+
+      setTimeout(() => {
+        const counter = setInterval(() => {
+          count += increment;
+          if (count >= target) {
+            el.textContent = target + suffix;
+            clearInterval(counter);
+          } else {
+            el.textContent = count.toFixed(1).replace(/\.0$/, '') + suffix;
+          }
+        }, 30);
+      }, index * 150);
+
+      statsObserver.unobserve(el);
+    });
+  }, { threshold: 0.5 });
+
+  document.querySelectorAll('.stat').forEach(el => statsObserver.observe(el));
+
+  /*lightbox*/
+
+  const lightbox = document.createElement("div");
+  lightbox.className = "lightbox";
+  lightbox.innerHTML = `<span class="close">&times;</span><img class="lightbox-img" />`;
+  document.body.appendChild(lightbox);
+
+  const lightboxImg = lightbox.querySelector(".lightbox-img");
+  const closeBtn = lightbox.querySelector(".close");
+
+  document.querySelectorAll(".cs-image img, .fullscreen-image").forEach(img => {
+    img.addEventListener("click", () => {
+      lightboxImg.src = img.src;
+      lightbox.style.display = "flex";
+      document.body.style.overflow = "hidden";
+    });
+  });
+
+  function closeLightbox() {
+    lightbox.style.display = "none";
+    lightboxImg.src = "";
+    document.body.style.overflow = "";
+  }
+
+  closeBtn.addEventListener("click", closeLightbox);
+  lightbox.addEventListener("click", e => e.target === lightbox && closeLightbox());
+  document.addEventListener("keydown", e => e.key === "Escape" && closeLightbox());
+});
+
+/*nav+footer */
+
+let lastScrollY = window.scrollY;
+
+fetch('nav.html')
+  .then(res => res.text())
+  .then(html => {
+    document.getElementById('nav').innerHTML = html;
+
+    const nav = document.querySelector(".top-nav");
+    const hamburger = document.getElementById("hamburger");
+    const navLinks = document.getElementById("navLinks");
+
+    if (hamburger) {
+      hamburger.addEventListener("click", () => {
+        navLinks.classList.toggle("show");
+      });
+    }
+
+    window.addEventListener("scroll", () => {
+      const currentScrollY = window.scrollY;
+      nav.classList.toggle("nav-hidden", currentScrollY > lastScrollY && currentScrollY > 80);
+      lastScrollY = currentScrollY;
+    });
+  });
+
+fetch('footer.html')
+  .then(res => res.text())
+  .then(html => {
+    document.getElementById('footer').innerHTML = html;
+
+    const copyBtn = document.querySelector('.copy-email');
+    if (copyBtn) {
+      copyBtn.addEventListener('click', () => {
+        navigator.clipboard.writeText(copyBtn.dataset.email);
+        copyBtn.textContent = 'Copied!';
+        setTimeout(() => copyBtn.textContent = 'Copy email', 1500);
+      });
+    }
+  });
 </script>
 </body>
 </html>

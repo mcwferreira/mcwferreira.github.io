@@ -19,17 +19,7 @@
 </head>
 
 <body>
-  <nav class="top-nav">
-    <div class="nav-inner">
-      <a href="home.html" class="logo">Marcus Ferreira</a>
-      <div class="nav-links" id="navLinks">
-        <a href="about.html">About</a>
-        <a href="MF/Marcus_ferreira_resume.pdf">Resume</a>
-        <a href="https://www.linkedin.com/in/marcuscferreira">LinkedIn</a>
-      </div>
-      <button class="hamburger" id="hamburger">&#9776;</button>
-    </div>
-  </nav>
+ <div id="nav"></div>
 
 <header class="hero-container" data-bg="images/nyli/nylihero.webp">
   <div class="inner">
@@ -188,148 +178,150 @@ It reinforced that small, continuous design improvements can have an outsized im
 <div id="footer"></div>
 
 <script>
-  const textObserver = new IntersectionObserver((entries) => {
+document.addEventListener('DOMContentLoaded', () => {
+
+  /*hero bg*/
+
+  document.querySelectorAll('.hero-container').forEach(hero => {
+    const bg = hero.getAttribute('data-bg');
+    if (!bg) return;
+
+    const img = new Image();
+    img.src = bg;
+    img.onload = () => {
+      hero.style.backgroundImage = `url(${bg})`;
+      hero.classList.add('bg-loaded');
+    };
+  });
+
+  /*hero animations */
+
+  const heroH1 = document.querySelector('.hero-h1');
+  const heroButton = document.querySelector('.button-hero');
+
+  if (heroH1) {
+    requestAnimationFrame(() => {
+      heroH1.classList.add('show');
+      setTimeout(() => heroButton?.classList.add('show'), 150);
+    });
+  }
+
+  /*fade animations*/
+
+  const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('show');
+        observer.unobserve(entry.target);
       }
     });
   }, { threshold: 0.2 });
 
-  document.querySelectorAll('.animate-left, .fade-in').forEach(el => {
-    if (!el.classList.contains('hero-h1')) {
-      textObserver.observe(el);
-    }
-  });
+  document.querySelectorAll('.fade-in, .animate-left').forEach(el => observer.observe(el));
 
-  // Trigger hero H1 immediately on load
-  window.addEventListener('load', () => {
-    const heroH1 = document.querySelector('.hero-h1');
-    if (heroH1) heroH1.classList.add('show');
-  });
-
-  /*Hero background from data-bg*/
-  document.querySelectorAll('.hero-container').forEach(hero => {
-    const bg = hero.getAttribute('data-bg');
-    if (bg) hero.style.backgroundImage = `url(${bg})`;
-  });
-
-  /*Stats animation (fade + count)*/
-
-  const stats = document.querySelectorAll('.stat');
+  /*stats*/
 
   const statsObserver = new IntersectionObserver(entries => {
     entries.forEach((entry, index) => {
-      if (entry.isIntersecting) {
-        const el = entry.target;
+      if (!entry.isIntersecting) return;
 
-        // Prevent re-triggering if already animated
-        if (el.dataset.animated === "true") return;
-        el.dataset.animated = "true";
+      const el = entry.target;
+      if (el.dataset.animated) return;
+      el.dataset.animated = "true";
 
-        // Fade up when visible
-        el.classList.add('visible');
+      const target = parseFloat(el.dataset.value);
+      const suffix = el.dataset.suffix || "";
+      let count = 0;
+      const steps = 40;
+      const increment = target / steps;
 
-        // Delay start for stagger effect
-        setTimeout(() => {
-          const target = parseFloat(el.dataset.value);
-          let count = 0;
-          const duration = 1200; // total animation time (ms)
-          const steps = 40; // fewer steps = smoother, skips numbers
-          const increment = target / steps;
-          const intervalTime = duration / steps;
+      setTimeout(() => {
+        const counter = setInterval(() => {
+          count += increment;
+          if (count >= target) {
+            el.textContent = target + suffix;
+            clearInterval(counter);
+          } else {
+            el.textContent = count.toFixed(1).replace(/\.0$/, '') + suffix;
+          }
+        }, 30);
+      }, index * 150);
 
-          const counter = setInterval(() => {
-            count += increment;
-            if (count >= target) {
-              el.textContent = target.toFixed(1).replace(/\.0$/, '') + (el.dataset.suffix || '');
-              clearInterval(counter);
-            } else {
-              el.textContent = count.toFixed(1).replace(/\.0$/, '') + (el.dataset.suffix || '');
-            }
-          }, intervalTime);
-        }, index * 150); // stagger each by 150ms
-      }
+      statsObserver.unobserve(el);
     });
   }, { threshold: 0.5 });
 
-  stats.forEach(stat => {
-    statsObserver.observe(stat);
-  });
+  document.querySelectorAll('.stat').forEach(el => statsObserver.observe(el));
 
-  window.scrollTo(0, 0);
+  /*lightbox*/
 
-  const sideMenu = document.getElementById("sideMenu");
-  const triggerSection = document.querySelector(".text-section-container.two-column");
-  const titles = document.querySelectorAll(".text-section-title");
-  const navLinks = document.querySelectorAll(".nav-link");
-  const topNav = document.getElementById("topNav");
-  const hamburger = document.getElementById("hamburger");
-  const mobileNavLinks = document.getElementById("navLinks");
+  const lightbox = document.createElement("div");
+  lightbox.className = "lightbox";
+  lightbox.innerHTML = `<span class="close">&times;</span><img class="lightbox-img" />`;
+  document.body.appendChild(lightbox);
 
-  hamburger.addEventListener("click", () => {
-    mobileNavLinks.classList.toggle("show");
-  });
+  const lightboxImg = lightbox.querySelector(".lightbox-img");
+  const closeBtn = lightbox.querySelector(".close");
 
-  window.addEventListener("scroll", () => {
-const top = window.scrollY;
-const overviewBottom = triggerSection.offsetTop + triggerSection.offsetHeight;
-
-  if (top > 10) {
-    topNav.classList.add("scrolled");
-  } else {
-    topNav.classList.remove("scrolled");
-  }
-
-  if (top > overviewBottom) {
-    sideMenu.style.display = "block";
-  } else {
-    sideMenu.style.display = "none";
-  }
-
-    titles.forEach(title => {
-      const rect = title.getBoundingClientRect();
-      if (rect.top < window.innerHeight - 100) {
-        title.classList.add("visible");
-      }
-    });
-
-    navLinks.forEach(link => {
-      const section = document.querySelector(link.getAttribute("href"));
-      if (
-        section &&
-        top >= section.offsetTop - 140 &&
-        top < section.offsetTop + section.offsetHeight - 140
-      ) {
-        link.classList.add("active");
-      } else {
-        link.classList.remove("active");
-      }
+  document.querySelectorAll(".cs-image img, .fullscreen-image").forEach(img => {
+    img.addEventListener("click", () => {
+      lightboxImg.src = img.src;
+      lightbox.style.display = "flex";
+      document.body.style.overflow = "hidden";
     });
   });
 
- fetch('footer.html')
-    .then(res => res.text())
-    .then(html => {
-      document.getElementById('footer').innerHTML = html;
-
-      // Copy email handler
-      const copyBtn = document.querySelector('.copy-email');
-      if (copyBtn) {
-        copyBtn.addEventListener('click', () => {
-          const email = copyBtn.dataset.email;
-          navigator.clipboard.writeText(email);
-          copyBtn.textContent = 'Copied!';
-          setTimeout(() => {
-            copyBtn.textContent = 'Copy email';
-          }, 1500);
-        });
-      }
-    });
-    
-     if (sessionStorage.getItem("nyli-unlocked") !== "true") {
-    window.location.href = "home.html";
+  function closeLightbox() {
+    lightbox.style.display = "none";
+    lightboxImg.src = "";
+    document.body.style.overflow = "";
   }
+
+  closeBtn.addEventListener("click", closeLightbox);
+  lightbox.addEventListener("click", e => e.target === lightbox && closeLightbox());
+  document.addEventListener("keydown", e => e.key === "Escape" && closeLightbox());
+});
+
+/*nav+footer */
+
+let lastScrollY = window.scrollY;
+
+fetch('nav.html')
+  .then(res => res.text())
+  .then(html => {
+    document.getElementById('nav').innerHTML = html;
+
+    const nav = document.querySelector(".top-nav");
+    const hamburger = document.getElementById("hamburger");
+    const navLinks = document.getElementById("navLinks");
+
+    if (hamburger) {
+      hamburger.addEventListener("click", () => {
+        navLinks.classList.toggle("show");
+      });
+    }
+
+    window.addEventListener("scroll", () => {
+      const currentScrollY = window.scrollY;
+      nav.classList.toggle("nav-hidden", currentScrollY > lastScrollY && currentScrollY > 80);
+      lastScrollY = currentScrollY;
+    });
+  });
+
+fetch('footer.html')
+  .then(res => res.text())
+  .then(html => {
+    document.getElementById('footer').innerHTML = html;
+
+    const copyBtn = document.querySelector('.copy-email');
+    if (copyBtn) {
+      copyBtn.addEventListener('click', () => {
+        navigator.clipboard.writeText(copyBtn.dataset.email);
+        copyBtn.textContent = 'Copied!';
+        setTimeout(() => copyBtn.textContent = 'Copy email', 1500);
+      });
+    }
+  });
 </script>
 
 </body>

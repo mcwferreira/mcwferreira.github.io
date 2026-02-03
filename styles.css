@@ -172,6 +172,19 @@ ul.p3 li::marker {
 }
 .button-hero:hover { background:#fff; color: var(--black); }
 
+.button.v2 {
+  background: transparent;
+  border: 1.5px solid var(--gray3);
+  color: var(--gray3);
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.button.v2:hover {
+  background: var(--gold);
+  border-color: var(--gray3);
+  color: var(--gray3);
+}
+
 /* Stats */
 .stats-container { display: flex; justify-content: space-between; align-items: flex-start; gap: 48px; margin-top: 48px; flex-wrap: nowrap; }
 .stat-group { flex: 1; text-align: center; }
@@ -416,6 +429,10 @@ ul.p3 li::marker {
   width: 80%;
   max-width: 320px;
   text-align: center;
+}
+
+.cs-password-modal input {
+  font-size: 16px;
 }
 
 /* Input row */

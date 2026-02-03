@@ -18,23 +18,7 @@
 
 </head>
 <body>
-  <nav id="topNav" class="top-nav">
-    <div class="nav-inner">
-      <a href="index.html" class="logo">Marcus Ferreira</a>
-  
-      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-  
-      <div class="nav-links" id="navLinks">
-        <a href="about.html">About</a>
-        <a href="MF/Marcus_Ferreira_Resume.pdf" target="_blank">Resume</a>
-        <a href="https://www.linkedin.com/in/marcuscferreira" target="_blank">LinkedIn</a>
-      </div>
-    </div>
-  </nav>
+  <div id="nav"></div>
   
   <header class="hero-container" data-bg="images/TCP/tcphero.webp">
     <div class="inner">
@@ -262,190 +246,151 @@
   </div>
 
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      // ----- HERO ANIMATION -----
-      const heroH1 = document.querySelector('.hero-h1');
-      const heroButton = document.querySelector('.button-hero');
-    
-      if (heroH1) {
-        requestAnimationFrame(() => {
-          heroH1.classList.add('show');
-          setTimeout(() => heroButton?.classList.add('show'), 150);
-        });
+document.addEventListener('DOMContentLoaded', () => {
+
+  /*hero bg*/
+
+  document.querySelectorAll('.hero-container').forEach(hero => {
+    const bg = hero.getAttribute('data-bg');
+    if (!bg) return;
+
+    const img = new Image();
+    img.src = bg;
+    img.onload = () => {
+      hero.style.backgroundImage = `url(${bg})`;
+      hero.classList.add('bg-loaded');
+    };
+  });
+
+  /*hero animations */
+
+  const heroH1 = document.querySelector('.hero-h1');
+  const heroButton = document.querySelector('.button-hero');
+
+  if (heroH1) {
+    requestAnimationFrame(() => {
+      heroH1.classList.add('show');
+      setTimeout(() => heroButton?.classList.add('show'), 150);
+    });
+  }
+
+  /*fade animations*/
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('show');
+        observer.unobserve(entry.target);
       }
-    
-      // ----- LIGHTBOX FUNCTIONALITY -----
-      // Create lightbox
-      const lightbox = document.createElement("div");
-      lightbox.classList.add("lightbox");
-      lightbox.style.display = "none"; // initially hidden
-      lightbox.innerHTML = `
-        <span class="close">&times;</span>
-        <img class="lightbox-img" src="" alt="Expanded view">
-      `;
-      document.body.appendChild(lightbox);
-    
-      const lightboxImg = lightbox.querySelector(".lightbox-img");
-      const closeBtn = lightbox.querySelector(".close");
-      const navbar = document.getElementById("topNav") || document.querySelector("nav");
-    
-      // Select all clickable images
-      const clickableImages = document.querySelectorAll(".cs-image img, .fullscreen-image");
-    
-      clickableImages.forEach(img => {
-        img.addEventListener("click", () => {
-          lightboxImg.src = img.src;
-          lightbox.style.display = "flex";
-          document.body.style.overflow = "hidden";
-          if (navbar) navbar.style.display = "none"; // hide navbar
-        });
-      });
-    
-      // Close lightbox
-      function closeLightbox() {
-        lightbox.style.display = "none";
-        lightboxImg.src = "";
-        document.body.style.overflow = "";
-        if (navbar) navbar.style.display = ""; // show navbar
-      }
-    
-      // Close events
-      closeBtn.addEventListener("click", closeLightbox);
-      lightbox.addEventListener("click", (e) => {
-        if (e.target === lightbox) closeLightbox();
-      });
-      document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape") closeLightbox();
-      });
-    
-      // ----- HERO BACKGROUND IMAGE -----
-      document.querySelectorAll('.hero-container').forEach(hero => {
-        const bg = hero.getAttribute('data-bg');
-        if (bg) {
-          const img = new Image();
-          img.src = bg;
-          img.onload = () => {
-            hero.style.backgroundImage = `url(${bg})`;
-            hero.classList.add('bg-loaded');
-          };
-        }
-      });
-    
-      // ----- GENERIC FADE-IN / ANIMATION OBSERVER -----
-      const animateObserver = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('show');
-            animateObserver.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.2 });
-    
-      document.querySelectorAll('.fade-in, .animate-left').forEach(el => {
-        animateObserver.observe(el);
-      });
-    
-      // ----- STATS COUNTER ANIMATION -----
-      const statsObserver = new IntersectionObserver(entries => {
-        entries.forEach((entry, index) => {
-          if (!entry.isIntersecting) return;
-          const el = entry.target;
-          if (el.dataset.animated === "true") return;
-    
-          el.dataset.animated = "true";
-          el.classList.add('visible');
-    
-          setTimeout(() => {
-            const target = parseFloat(el.dataset.value);
-            let count = 0;
-            const duration = 1200;
-            const steps = 40;
-            const increment = target / steps;
-            const intervalTime = duration / steps;
-    
-            const counter = setInterval(() => {
-              count += increment;
-              if (count >= target) {
-                el.textContent = target.toFixed(1).replace(/\.0$/, '') + (el.dataset.suffix || '');
-                clearInterval(counter);
-              } else {
-                el.textContent = count.toFixed(1).replace(/\.0$/, '') + (el.dataset.suffix || '');
-              }
-            }, intervalTime);
-          }, index * 150);
-    
-          statsObserver.unobserve(el);
-        });
-      }, { threshold: 0.5 });
-    
-      document.querySelectorAll('.stat').forEach(el => statsObserver.observe(el));
-    
-      // ----- SCROLL TO TOP -----
-      window.scrollTo(0, 0);
-    
-      // ----- NAVIGATION + SIDE MENU -----
-      const sideMenu = document.getElementById("sideMenu");
-      const triggerSection = document.querySelector(".text-section-container.two-column");
-      const titles = document.querySelectorAll(".text-section-title");
-      const navLinks = document.querySelectorAll(".nav-link");
-      const hamburger = document.getElementById("hamburger");
-      const mobileNavLinks = document.getElementById("navLinks");
-    
-      hamburger.addEventListener("click", () => {
-        mobileNavLinks.classList.toggle("show");
-      });
-    
-      window.addEventListener("scroll", () => {
-        const top = window.scrollY;
-        const overviewBottom = triggerSection.offsetTop + triggerSection.offsetHeight;
-    
-        topNav.classList.toggle("scrolled", top > 10);
-        sideMenu.style.display = top > overviewBottom ? "block" : "none";
-    
-        titles.forEach(title => {
-          const rect = title.getBoundingClientRect();
-          if (rect.top < window.innerHeight - 100) title.classList.add("visible");
-        });
-    
-        navLinks.forEach(link => {
-          const section = document.querySelector(link.getAttribute("href"));
-          if (section && top >= section.offsetTop - 140 && top < section.offsetTop + section.offsetHeight - 140) {
-            link.classList.add("active");
+    });
+  }, { threshold: 0.2 });
+
+  document.querySelectorAll('.fade-in, .animate-left').forEach(el => observer.observe(el));
+
+  /*stats*/
+
+  const statsObserver = new IntersectionObserver(entries => {
+    entries.forEach((entry, index) => {
+      if (!entry.isIntersecting) return;
+
+      const el = entry.target;
+      if (el.dataset.animated) return;
+      el.dataset.animated = "true";
+
+      const target = parseFloat(el.dataset.value);
+      const suffix = el.dataset.suffix || "";
+      let count = 0;
+      const steps = 40;
+      const increment = target / steps;
+
+      setTimeout(() => {
+        const counter = setInterval(() => {
+          count += increment;
+          if (count >= target) {
+            el.textContent = target + suffix;
+            clearInterval(counter);
           } else {
-            link.classList.remove("active");
+            el.textContent = count.toFixed(1).replace(/\.0$/, '') + suffix;
           }
-        });
+        }, 30);
+      }, index * 150);
+
+      statsObserver.unobserve(el);
+    });
+  }, { threshold: 0.5 });
+
+  document.querySelectorAll('.stat').forEach(el => statsObserver.observe(el));
+
+  /*lightbox*/
+
+  const lightbox = document.createElement("div");
+  lightbox.className = "lightbox";
+  lightbox.innerHTML = `<span class="close">&times;</span><img class="lightbox-img" />`;
+  document.body.appendChild(lightbox);
+
+  const lightboxImg = lightbox.querySelector(".lightbox-img");
+  const closeBtn = lightbox.querySelector(".close");
+
+  document.querySelectorAll(".cs-image img, .fullscreen-image").forEach(img => {
+    img.addEventListener("click", () => {
+      lightboxImg.src = img.src;
+      lightbox.style.display = "flex";
+      document.body.style.overflow = "hidden";
+    });
+  });
+
+  function closeLightbox() {
+    lightbox.style.display = "none";
+    lightboxImg.src = "";
+    document.body.style.overflow = "";
+  }
+
+  closeBtn.addEventListener("click", closeLightbox);
+  lightbox.addEventListener("click", e => e.target === lightbox && closeLightbox());
+  document.addEventListener("keydown", e => e.key === "Escape" && closeLightbox());
+});
+
+/*nav+footer */
+
+let lastScrollY = window.scrollY;
+
+fetch('nav.html')
+  .then(res => res.text())
+  .then(html => {
+    document.getElementById('nav').innerHTML = html;
+
+    const nav = document.querySelector(".top-nav");
+    const hamburger = document.getElementById("hamburger");
+    const navLinks = document.getElementById("navLinks");
+
+    if (hamburger) {
+      hamburger.addEventListener("click", () => {
+        navLinks.classList.toggle("show");
       });
+    }
+
+    window.addEventListener("scroll", () => {
+      const currentScrollY = window.scrollY;
+      nav.classList.toggle("nav-hidden", currentScrollY > lastScrollY && currentScrollY > 80);
+      lastScrollY = currentScrollY;
     });
+  });
+
 fetch('footer.html')
-    .then(res => res.text())
-    .then(html => {
-      document.getElementById('footer').innerHTML = html;
+  .then(res => res.text())
+  .then(html => {
+    document.getElementById('footer').innerHTML = html;
 
-      // Copy email handler
-      const copyBtn = document.querySelector('.copy-email');
-      if (copyBtn) {
-        copyBtn.addEventListener('click', () => {
-          const email = copyBtn.dataset.email;
-          navigator.clipboard.writeText(email);
-          copyBtn.textContent = 'Copied!';
-          setTimeout(() => {
-            copyBtn.textContent = 'Copy email';
-          }, 1500);
-        });
-      }
-    });
+    const copyBtn = document.querySelector('.copy-email');
+    if (copyBtn) {
+      copyBtn.addEventListener('click', () => {
+        navigator.clipboard.writeText(copyBtn.dataset.email);
+        copyBtn.textContent = 'Copied!';
+        setTimeout(() => copyBtn.textContent = 'Copy email', 1500);
+      });
+    }
+  });
+</script>
 
-    </script>
-    
-    
-
-    
-  
-  
-  
-  
-  
-  
 </body>
 </html>
