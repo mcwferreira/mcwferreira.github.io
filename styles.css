@@ -2,11 +2,16 @@
 
 :root {
   --bg: #f7f5ed;
+  --bg2: #edebdf;
   --black: #000;
   --gray: #747474;
   --gray1: #D5D5DD;
   --gray3: #181818;
   --gold: #FFDF64;
+  --smoke: #69688F;
+  --tea: #D4E6B5;
+  --olive: #AFC97E;
+  --flax: #E2D686;
   --corner-radius: 24px;
   --container: 1400px;
 }
@@ -117,6 +122,9 @@ ul.p3 li::marker {
 .section-container .p2 { margin-bottom: 48px; }
 .text-columns { display: flex; gap: 48px; }
 .text-columns > div { flex: 1; }
+.color-dark {
+  background-color: var(--bg2);
+}
 
 /* Profile Images */
 .profile-img-container {

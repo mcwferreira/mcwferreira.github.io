@@ -11,14 +11,12 @@
   --site-pad: 2rem;
   
 
-  --smoke: #69688F;
+  
   --lsmoke: rgba(105, 104, 143, 0.1);
   
   --gray2: #747474;
 
-  --tea: #D4E6B5;
-  --olive: #AFC97E;
-  --flax: #E2D686;
+
   --gold: #FFDF64;  
   --yellow: #FFC947; 
 
@@ -43,47 +41,6 @@ body {
   font-weight: 400;
   line-height: 23px;
   color: var(--gray3);
-}
-
-h5 {
-  font-size: 18px;
-  line-height: 22px;
-  font-weight: 500;
-  
-  color: var(--gray3);
-  margin: 0;
-  font-family: var(--display-font)
-}
-
-h4 {
-    font-size: 14px;
-    line-height: 22px;
-    font-weight: 300;
-    text-transform: uppercase;
-    color: var(--smoke);
-    margin: 0;
-   
-}
-
-h3 {
-    font-size: 16px;
-    line-height: 22px;
-    font-weight: 300;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: var(--smoke);
-    margin: 0;
-   
-}
-
-h3 {
-    font-size: 16px;
-    line-height: 22px;
-    font-weight: 300;
-    text-transform: uppercase;
-    color: var(--smoke);
-    margin: 0;
-   
 }
 
 
