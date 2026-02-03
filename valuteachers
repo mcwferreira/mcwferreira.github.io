@@ -22,7 +22,7 @@
   
   <header class="hero-container" data-bg="images/VT/vthero.webp">
     <div class="inner">
-      <h1 class="animate-left hero-h1">Updating and optimizing to increase conversions</h1>
+      <h1 class="animate-left hero-h1">Streamlining Conversion Paths for Retirement Services</h1>
       <div class="button-wrapper">
         <a href="#design" class="button-hero fade-in-delayed">See Prototype</a>
       </div>
@@ -35,64 +35,109 @@
     </div>
     <div class="body-col">
       
-      <p class="p2 bold fade-in">The Connected Parent, a web-based SaaS platform that helps families find and review disability, autism, and mental health resources with ease and confidence. This early-stage SaaS startup needed to improve usability and accessibility across its platform, balancing speed-to-market with user trust.</p>
+      <p class="p2 bold fade-in">ValuTeachers, a retirement services company specializing in educator and school employee retirement planning, needed a complete website redesign. The existing site had unclear navigation, outdated aesthetics, and a conversion path that wasn't effectively guiding users toward key actions. My role was to create a modern, intuitive interface that would improve user flow and increase conversions while better communicating their comprehensive retirement services.</p>
       <div class="three-col-list">
         <div>
           <h4>Role</h4>
-          <p>Lead designer</p>
+          <p>UX/ UI Designer</p>
           <p>Visual designer</p>
           <p>Prototype</p>
-          <p>Design system</p>
         </div>
         <div>
           <h4>Team</h4>
           <p>Engineer</p>
-          <p>Product manager</p>
+          <p>Account manager</p>
         </div>
         <div>
           <h4>Duration</h4>
-          <p>13 months</p>
+          <p>3 months</p>
         </div>
       </div>
     </div>
   </div> 
 
-  <!-- Challenges & Goals -->
+<section class="section-container" id="sitemap">
+    <div class="container">
+      <h2>Defining the website</h2>
+      <p class="p">Although there is an existing site, it was necessary to do an overflow for the mapping of the screens. With the updated site map, I was able to show the overall structure and organization of my application. This was highly beneficial to both the client and developers to understand the functionality of the product.</p>
+      <div class="container">
+        <img src="images/TCP/sitemap.webp" alt="Full height image" class="fullscreen-image">
+        <p class="p4">Redefined Sitemap</p>
+      </div> 
+    </div>
+  </section>
+
   <section class="section-container">
     <div class="container">
-      <h2>Challenges</h2>
-      <p class="p">Users struggled to complete basic core actions for the platform, and colors failed accessibility standards, creating usability and compliance concerns. Our challenge was to simplify key flows and create a playful yet accessible design.</p>
-     
+      <h2>Challenge</h2>
+        <p class="p">The primary goals for this redesign were:</p>
       <div class="text-columns">
         <div>
           <h3>Problems</h3>
-          <p class="p3">Confusing account creation and navigation</p>
-          <p class="p3">Ineffective search and filtering</p>
-          <p class="p3">Reviews hard to write and discover</p>
-          <p class="p3">Color palette failed WCAG guidelines</p>
+          <p class="p3"><strong>Increase conversions</strong> by creating clearer paths to action/p>
+          <p class="p3"><strong>Improve user flow</strong> to help visitors navigate the site intuitively</p>
+          <p class="p3"><strong>Modernize the aestheti</strong> to align with current web standards</p>
+          <p class="p3"><strong>Better communicate services</strong> to help users understand ValuTeachers' comprehensive offerings</p>
         </div>
         <div>
-          <h3>Goals</h3>
-          <p class="p3">Streamline key workflows</p>
-          <p class="p3">Design reusable, flexible components</p>
-          <p class="p3">Meet accessibility requirements</p>
-          <p class="p3">Keep a playful, family-friendly tone</p>
+          <h3>Without conducting formal user research, I relied on competitor analysis, the client's vision for their new direction, and established UX principles to guide the redesign. The focus was on creating an intuitive path from first visit to conversion while ensuring the diverse range of retirement services was clearly presented.</h3>
         </div>
       </div>
+    </div>
+  </section>
+
+<section class="section-container">
+    <div class="container">
+      <h2>My Approach</h2>
+      <p class="p">I began with low-fidelity wireframes to establish the information architecture and basic layout structure. This helped me quickly iterate on navigation patterns and content hierarchy without getting caught up in visual details. From here it was a quick progression to medium-fidelity wireframes. These frames introduced more refined layouts, clearer content blocks, and initial thoughts on component placement. The med-fi stage was particularly important for client presentations, as it allowed stakeholders to review the direction before copy and final styling were applied.</p>
       <div class="image-row">
         <div class="cs-image highlight-outline">
-          <img src="images/TCP/Flow.webp" alt="Existing home page" />
-          <p class="p4">The existing homepage, confusing process to create an account, and requiring too much effort to begin searching</p>
+          <img src="images/vt/medfi-home.webp" alt="Homepage medfi wireframes" />
+          <p class="p4">The basic build for the homepage, conveying the types of services VT provides</p>
         </div>
         <div class="cs-image highlight-outline">
-          <img src="images/TCP/Navigation.webp" alt="Existing search and filter options" />
-          <p class="p4">The previous search with a confusing process, CTA's, and filter options</p>
+          <img src="images/vt/medfi-story.webp" alt="Our Story medfi wireframes" />
+          <p class="p4">The "Our Story" page, backing up statistics for ValueTeachers and telling the story of how they came about.</p>
         </div>
         <div class="cs-image highlight-outline">
-          <img src="images/TCP/Contrast.webp" alt="Existing site contrast" />
-          <p class="p4">ADA contrast audit of the existing site did not meet WCAG 2.2 guidelines in several places</p>
+          <img src="images/vt/medfi-combined.webp" alt="Combined Wireframes" />
+          <p class="p4">Snippet of all of the pages</p>
         </div>
       </div>
+      
+      <div class="text-columns">
+        <div>
+          <h3>Search & Filters</h3>
+          <p class="p3">Redesigned as a prominent entry point with adaptable filter chips and clear results labeling.</p>
+        </div>
+        <div>
+          <h3>Navigation Flows</h3>
+          <p class="p3">Simplified menus and review flows, minimizing clicks and clarifying each step.</p>
+        </div>
+        <div>
+          <h3>Accessible Palette</h3>
+          <p class="p3">Introduced new color options tested for WCAG AA compliance, keeping the style approachable and playful.</p>
+        </div>        
+      </div>
+      <br><br>
+      <h2>Accessibility updates</h2>
+      <p class="p">The accessibility updates proved to be an immense undertaking, as it required careful consideration of all existing marketing materials, emails, and other assets. The scope of the task involved ensuring that the new colors not only addressed accessibility concerns but also seamlessly integrated across their entire range of materials.</p>
+      <p>Through this collaborative process, the client and I worked together to refine the palette and found an outcome that exceeded the client's expectations.</p>
+      <div class="image-row">
+        <div class="cs-image highlight-outline">
+          <img src="images/TCP/Color 1.webp" alt="Color Option 1" />
+          <p class="p4">Color palette option 1</p>
+        </div>
+        <div class="cs-image highlight-outline">
+          <img src="images/TCP/Color 2.webp" alt="Color Option 2" />
+          <p class="p4">Color palette option 2</p>
+        </div>
+        <div class="cs-image highlight-outline">
+          <img src="images/TCP/Color 3.webp" alt="Color Option 3" />
+          <p class="p4">Color palette option 3</p>
+        </div>
+      </div>
+      
     </div>
   </section>
 
