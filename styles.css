@@ -504,10 +504,7 @@ ul.p3 li::marker {
 @media (min-width: 768px) {
   .nav-links { display: flex; flex-direction: row; justify-content: flex-end; align-items: center; gap: 32px; opacity: 1; pointer-events: auto; position: static; padding: 0; margin-left: auto; }
   .logo { margin-right: 32px; white-space: nowrap; flex-shrink: 0; }
-  .two-col {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
+  
 }
 
 @media (max-width: 1000px) {
@@ -541,6 +538,12 @@ ul.p3 li::marker {
     font-weight: 500;
     font-size: inherit;
   }
+
+  .two-col {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  
   .nav-links a:hover { text-decoration: underline; }
 
   /* Hero adjustments */
