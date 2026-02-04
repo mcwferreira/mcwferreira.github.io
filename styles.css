@@ -273,11 +273,9 @@ ul.p3 li::marker {
 
 .footer-band {
   width: 100%;
-  background: var(--bg2);
   border-top: 1px solid var(--gray1); /* matches case studies */
   margin-top: 120px;
-  margin-bottom: 120px;
-}
+  margin-bottom: 120px;rea }
 
 .footer-cta {
   padding-top: 64px;
