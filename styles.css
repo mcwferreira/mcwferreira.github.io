@@ -275,7 +275,8 @@ ul.p3 li::marker {
   width: 100%;
   border-top: 1px solid var(--gray1); /* matches case studies */
   margin-top: 120px;
-  margin-bottom: 120px;rea }
+  margin-bottom: 120px; 
+}
 
 .footer-cta {
   padding-top: 64px;
@@ -381,20 +382,33 @@ ul.p3 li::marker {
   display: block;
 }
 
+/* Two-column content section */
+.two-col {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 64px;
+  align-items: start;
+}
 
-/* STACK IMAGE AND P4 TEXT VERTICALLY IN IMAGE ROWS (case studies) */
+.image-col img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--corner-radius);
+}
+
+
 .image-row .cs-image {
-  display: flex;           /* flex container */
-  flex-direction: column;  /* stack children vertically */
-  align-items: flex-start; /* align text to left, image stays top */
+  display: flex;          
+  flex-direction: column;  
+  align-items: flex-start; 
   justify-content: flex-start;
-  padding: 24px;           /* optional spacing inside highlight-outline */
+  padding: 24px;      
 }
 
 .image-row .cs-image img {
   width: 100%;
   height: auto;
-  margin-bottom: 12px;     /* spacing between image and p4 text */
+  margin-bottom: 12px;
 }
 
 .image-row .cs-image p.p4 {
@@ -407,17 +421,15 @@ ul.p3 li::marker {
 .cs-subtext { font-family: var(--body-font); font-size: 16px; font-weight: 400; color: #69688F; line-height: 22px; margin: 0; }
 .cs-description { font-family: var(--body-font); font-size: 16px; font-weight: 400; color: #0F0F0F; line-height: 22px; margin: 0; }
 
-/* Spacing between case studies (desktop default) */
 .cs-container { margin-bottom: 32px; }
 
-/* CASE STUDY IMAGES: stack p4 under image */
 .cs-container .cs-image {
-  display: block; /* ignore flex row of parent */
+  display: block; 
 }
 
 .cs-container .cs-image img {
-  display: block; /* ensures image takes full width */
-  margin-bottom: 12px; /* spacing between image and p4 text */
+  display: block; 
+  margin-bottom: 12px; 
 }
 
 .cs-container .cs-image p.p4 {
@@ -455,7 +467,6 @@ ul.p3 li::marker {
   font-size: 16px;
 }
 
-/* Input row */
 .password-row {
   display: flex;
   gap: 8px;
@@ -485,24 +496,23 @@ ul.p3 li::marker {
   font-size: 13px;
 }
 
-/* Show state */
 .cs.show-password .cs-password-overlay {
   display: flex;
 }
 
 
-/* Desktop Nav */
 @media (min-width: 768px) {
   .nav-links { display: flex; flex-direction: row; justify-content: flex-end; align-items: center; gap: 32px; opacity: 1; pointer-events: auto; position: static; padding: 0; margin-left: auto; }
   .logo { margin-right: 32px; white-space: nowrap; flex-shrink: 0; }
+  .two-col {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
 }
 
-/* Tablet (≤1000px) */
 @media (max-width: 1000px) {
   .container, .hero-container .inner, .nav-inner { padding-left: 60px; padding-right: 60px; }
 }
-
-/* Mobile (≤768px) */
 @media (max-width: 768px) {
   .nav-links {
     display: none;
