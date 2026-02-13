@@ -29,6 +29,7 @@
     </div>
   </header>
 
+  <section class="section-container">
   <div class="container hero-info">
     <div class="title-col">
       <h2>Overview</h2>
@@ -56,54 +57,28 @@
       </div>
     </div>
   </div> 
-
-  <!-- Challenges & Goals -->
-  <section class="section-container">
-    <div class="container">
-      <h2>Challenges</h2>
-      <p class="p">Users struggled to complete basic core actions for the platform, and colors failed accessibility standards, creating usability and compliance concerns. Our challenge was to simplify key flows and create a playful yet accessible design.</p>
-     
-      <div class="text-columns">
-        <div>
-          <h3>Problems</h3>
-          <p class="p3">Confusing account creation and navigation</p>
-          <p class="p3">Ineffective search and filtering</p>
-          <p class="p3">Reviews hard to write and discover</p>
-          <p class="p3">Color palette failed WCAG guidelines</p>
-        </div>
-        <div>
-          <h3>Goals</h3>
-          <p class="p3">Streamline key workflows</p>
-          <p class="p3">Design reusable, flexible components</p>
-          <p class="p3">Meet accessibility requirements</p>
-          <p class="p3">Keep a playful, family-friendly tone</p>
-        </div>
-      </div>
-      <div class="image-row">
-        <div class="cs-image highlight-outline">
-          <img src="images/TCP/Flow.webp" alt="Existing home page" />
-          <p class="p4">The existing homepage, confusing process to create an account, and requiring too much effort to begin searching</p>
-        </div>
-        <div class="cs-image highlight-outline">
-          <img src="images/TCP/Navigation.webp" alt="Existing search and filter options" />
-          <p class="p4">The previous search with a confusing process, CTA's, and filter options</p>
-        </div>
-        <div class="cs-image highlight-outline">
-          <img src="images/TCP/Contrast.webp" alt="Existing site contrast" />
-          <p class="p4">ADA contrast audit of the existing site did not meet WCAG 2.2 guidelines in several places</p>
-        </div>
-      </div>
-    </div>
   </section>
 
-  <!-- Research -->
-  <section class="section-container color-dark">
-    <div class="container">
-      <h2>Understanding the Users</h2>
-      <p class="p2">To learn what families truly needed, I surveyed 15 parents and caregivers navigating disability and autism resources. Their input shaped how flows and priorities were redesigned.</p>
+<section class="section-container">
+  <div class="container">
+    <div>
+      <h2>Problems</h2>
     </div>
-    <div class="container">
-      <div class="stats-container">
+    <div class="text-columns">
+        <div>
+          <h3>Basic user flows</h3>
+          <p class="p3">Writing reviews and creating accounts are confusing and frustrating</p>
+        </div>
+        <div>
+          <h3>Search and filtering</h3>
+          <p class="p3">Searching is not intuitive and could benefit from clear filter options.</p>
+        </div>
+        <div>
+          <h3>Accessible Palette</h3>
+          <p class="p3">The existing color palette fails WCAG guidelines in several areas and requires an overhaul.</p>
+        </div>    
+    </div>
+    <div class="stats-container">
         <div class="stat-group">
           <div class="stat" data-value="71.4" data-suffix="%">0%</div>
           <div class="stat-text">Are most influenced from reviews by other families</div>
@@ -123,78 +98,170 @@
           <div class="stat" data-value="57.1" data-suffix="%">0%</div>
           <div class="stat-text">Attend 5-10 events per year</div>
         </div>
-      </div>
-    </div>
-    
-  </section>
+      </div> 
+      <p class="p4">Results from survey conducted with parents and caregivers navigating disability and autism resources.</p>    
+  </div>
+</section>
 
 
   <!-- Design -->
 
-  <section class="section-container" id="sitemap">
-    <div class="container">
-      <h2>Defining the website</h2>
-      <p class="p">Although there is an existing site, it was necessary to do an overflow for the mapping of the screens. With the updated site map, I was able to show the overall structure and organization of my application. This was highly beneficial to both the client and developers to understand the functionality of the product.</p>
-      <div class="container">
-        <img src="images/TCP/sitemap.webp" alt="Full height image" class="fullscreen-image">
-        <p class="p4">Redefined Sitemap</p>
-      </div> 
-    </div>
-  </section>
 
-  <section class="section-container">
-    <div class="container">
-      <h2>Iterating Solutions</h2>
-      <p class="p">The main components to focus on were simplifying navigation, creating a reusable component system, and ensuring colors and typography met accessibility standards while staying true to TCP's brand personality. A large constraint in this phase, as well as through a lot of the design implementation, was the restricted search feature that required users to select keywords instead of typing them in. This impeded user experience and would later be rectified in later developments.</p>
+<section class="section-container">
+  <div class="container">
+    <div>
+      <h2>Design Development</h2>
+    </div>
+    <div>
+      <h3>Defining the Sitemap</h3>
+      <p class="p">I mapped the existing screens to identify any overflow or redundancies, and then devised a new sitemap. Defining this sitemap was incredibly 
+        beneficial because, aside from easing the flow throughout the site, it served as a roadmap for how to proceed with this huge overhaul. 
+        Having the client visualize the pages while we discussed priorities was a big help. Since most of the pages were either being completely redone 
+        or added/removed, looking at the existing site wasn't as beneficial as this approach for understanding our scope.</p>
+      <div class="image-row">
+        <div class="cs-image highlight-outline">
+          <img src="images/TCP/sitemap.webp" alt="Site map" />
+          <p class="p4">Redefined Sitemap</p>
+        </div>
+      </div>
+    </div>  
+    <div>
+      <h3>Iterating Layouts</h3>
+      <p class="p">Wireframes were quickly created to review the priority of components and review new layouts. The focus was mostly placed were 
+        simplifying navigation, seeing where and how we could shift to a reusable component system. A large constraint in this phase, 
+        as well as through a lot of the design implementation, was the restricted search feature that required users to select keywords 
+        instead of typing them in. This impeded user experience and would be rectified in later developments.</p>
       <div class="image-row">
         <div class="cs-image highlight-outline">
           <img src="images/TCP/Lofi1.webp" alt="Lofi Wireframes 1" />
-          <p class="p4">Low fidelity wireframes of the homepage</p>
+          <p class="p4">Low-fidelity wireframes of the homepage</p>
         </div>
         <div class="cs-image highlight-outline">
           <img src="images/TCP/Lofi2.webp" alt="Lofi Wireframes 2" />
-          <p class="p4">Low fidelity wireframes of search results page</p>
+          <p class="p4">Low-fidelity wireframes of search results page</p>
         </div>
         <div class="cs-image highlight-outline">
           <img src="images/TCP/Medfi1.webp" alt="Medfi Wireframes 3" />
-          <p class="p4">Mediumn fidelity wireframes of search results</p>
+          <p class="p4">Mediumn-fidelity wireframes of search results</p>
         </div>
       </div>
-      <div class="text-columns">
-        <div>
-          <h3>Search & Filters</h3>
-          <p class="p3">Redesigned as a prominent entry point with adaptable filter chips and clear results labeling.</p>
-        </div>
-        <div>
-          <h3>Navigation Flows</h3>
-          <p class="p3">Simplified menus and review flows, minimizing clicks and clarifying each step.</p>
-        </div>
-        <div>
-          <h3>Accessible Palette</h3>
-          <p class="p3">Introduced new color options tested for WCAG AA compliance, keeping the style approachable and playful.</p>
-        </div>        
-      </div>
-      <br><br>
-      <h2>Accessibility updates</h2>
-      <p class="p">The accessibility updates proved to be an immense undertaking, as it required careful consideration of all existing marketing materials, emails, and other assets. The scope of the task involved ensuring that the new colors not only addressed accessibility concerns but also seamlessly integrated across their entire range of materials.</p>
+    </div>
+    <div>
+      <h3>Style Guide and Accessibility Overhaul</h3>    
+      <p class="p">All styles were implemented into Figma for efficient and consistent designs. The accessibility updates proved to be an immense undertaking, as it required careful consideration of all existing marketing materials, 
+        emails, and other assets. The scope of the task involved ensuring that the new colors not only addressed accessibility concerns but also seamlessly 
+        integrated across their entire range of materials.</p>
       <p>Through this collaborative process, the client and I worked together to refine the palette and found an outcome that exceeded the client's expectations.</p>
+      <img src="images/TCP/styleguide.webp" alt="Full height image" class="fullscreen-image">
+      <p class="p4">Figma Style Guide</p>
+    </div>
+  </div>
+</section>
+
+<section class="section-container">
+  <div class="container">
+    <div>
+      <h2>Establishing Solutions</h2>
+    </div>
+      <h3>Home and Search</h3>
+      <p class="p">We redesigned the home and search experience to help families find resources faster while reducing decision fatigue. 
+        Improved filtering and clearer information architecture made it easier to move from browsing to booking with confidence</p>
       <div class="image-row">
         <div class="cs-image highlight-outline">
-          <img src="images/TCP/Color 1.webp" alt="Color Option 1" />
-          <p class="p4">Color palette option 1</p>
+          <img src="images/TCP/Home Screen.webp" alt="Home Screen" />
+          <p class="p4">Home screen</p>
         </div>
         <div class="cs-image highlight-outline">
-          <img src="images/TCP/Color 2.webp" alt="Color Option 2" />
-          <p class="p4">Color palette option 2</p>
+          <img src="images/TCP/Searching - Resources - All - In Person.webp" alt="Resource Search screen" />
+          <p class="p4">Resource Search screen</p>
         </div>
         <div class="cs-image highlight-outline">
-          <img src="images/TCP/Color 3.webp" alt="Color Option 3" />
-          <p class="p4">Color palette option 3</p>
+          <img src="images/TCP/Searching - Events.webp" alt="Event Search screen" />
+          <p class="p4">Event Search screen</p>
         </div>
       </div>
-      
-    </div>
-  </section>
+
+      <h3>Business Page</h3>
+      <p class="p">Business pages were rebuilt to foreground credibility and social proof. Services, contact information, and community reviews now follow a 
+        hierarchy that answers parent questions immediately, while a simplified review flow encourages more families to share their experiences.</p>
+      <div class="image-row">
+        <div class="cs-image highlight-outline">
+          <img src="images/TCP/Business Page.webp" alt="Business Page Screen" />
+          <p class="p4">Business Page Screen</p>
+        </div>
+        <div class="cs-image highlight-outline">
+          <img src="images/TCP/Business Page - Review.webp" alt="Business Page Review screen" />
+          <p class="p4">Business Page Review Screen</p>
+        </div>
+      </div>
+
+      <h3>Event Page</h3>
+      <p class="p">The event experience was designed for caregivers managing packed schedules who need information quickly. 
+        Clear details and streamlined actions make it easy to discover activities or contribute events without adding friction to already busy lives.</p>
+      <div class="image-row">
+        <div class="cs-image highlight-outline">
+          <img src="images/TCP/Event Page - Desktop.webp" alt="Event screen" />
+          <p class="p4">Event Screen</p>
+        </div>
+        <div class="cs-image highlight-outline">
+          <img src="images/TCP/Event Page - Add - Desktop.webp" alt="Add Event screen" />
+          <p class="p4">Add Event Screen</p>
+        </div>
+      </div>
+
+      <h3>User Profile</h3>
+      <p class="p">We created a user prtofile that helps families manage their activity while discovering how they connect to others with similar needs. 
+        Saved searches, reviews, and profile tools now live in one place, encouraging return visits and deeper platform engagement.</p>
+      <div class="image-row">
+        <div class="cs-image highlight-outline">
+          <img src="images/TCP/User Profile - Overview - Desktop.webp" alt="User Profile Overview Screen" />
+          <p class="p4">User Profile Overview Screen</p>
+        </div>
+        <div class="cs-image highlight-outline">
+          <img src="images/TCP/User Profile - Edit - Desktop.webp" alt="User Profile Edit Screen" />
+          <p class="p4">User Profile Edit Screen</p>
+        </div>
+        <div class="cs-image highlight-outline">
+          <img src="images/TCP/User Profile - Reviews - Desktop.webp" alt="User Profile Reviews Screen" />
+          <p class="p4">User Profile Reviews Screen</p>
+        </div>
+        <div class="cs-image highlight-outline">
+          <img src="images/TCP/User Profile - Searches.webp" alt="User Profile Searches Screen" />
+          <p class="p4">User Profile Searches Screen</p>
+        </div>
+        <div class="cs-image highlight-outline">
+          <img src="images/TCP/User Profile - Settings.webp" alt="User Profile Settings Screen" />
+          <p class="p4">User Profile Settings Screen</p>
+        </div>
+        <div class="cs-image highlight-outline">
+          <img src="images/TCP/User Profile - Events.webp" alt="User Profile Events Screen" />
+          <p class="p4">User Profile Events Screen</p>
+        </div>
+      </div>
+
+      <h3>Business Portal</h3>
+      <p class="p">A business portal was built to help providers manage their presence with less administrative overhead. 
+        Streamlined listing tools and review management encourage active participation, strengthening the ecosystem for both businesses 
+        and the families who rely on them.</p>
+      <div class="image-row">
+        <div class="cs-image highlight-outline">
+          <img src="images/TCP/Business Portal - Desktop.webp" alt="Business Portal Screen" />
+          <p class="p4">Business Portal screen</p>
+        </div>
+        <div class="cs-image highlight-outline">
+          <img src="images/TCP/Business Portal - Businesses - Desktop.webp" alt="Business Portal businesses screen" />
+          <p class="p4">Business Portal businesses screen</p>
+        </div>
+        <div class="cs-image highlight-outline">
+          <img src="images/TCP/Business Portal - Reviews - Desktop.webp" alt="Business Portal reviews screen" />
+          <p class="p4">Business Portal reviews screen</p>
+        </div>
+      </div>
+  </div>
+ </section>
+
+
+
 
   <!-- Outcomes -->
   <section class="section-container" id="design">
@@ -236,13 +303,26 @@
     </div>
   </section>
 
+<!--
+  <div class="text-columns">
+        <div>
+          <h3>Search & Filters</h3>
+          <p class="p3">Redesigned as a prominent entry point with adaptable filter chips and clear results labeling.</p>
+        </div>
+        <div>
+          <h3>Navigation Flows</h3>
+          <p class="p3">Simplified menus and review flows, minimizing clicks and clarifying each step.</p>
+        </div>
+        <div>
+          <h3>Accessible Palette</h3>
+          <p class="p3">Introduced new color options tested for WCAG AA compliance, keeping the style approachable and playful.</p>
+        </div>        
+      </div>-->
+
+
 <div id="footer"></div>
  
 
-  <div class="lightbox" id="lightbox">
-    <span class="close">&times;</span>
-    <img class="lightbox-img" id="lightbox-img" src="" alt="">
-  </div>
 
  <script>
   /*Nav+footer */
@@ -361,6 +441,13 @@ document.addEventListener('DOMContentLoaded', () => {
       document.body.style.overflow = '';
     }
   });
+
+  document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && lightbox.style.display === 'flex') {
+    lightbox.style.display = 'none';
+    document.body.style.overflow = '';
+  }
+});
 
   
 

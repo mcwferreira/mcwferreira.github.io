@@ -314,41 +314,7 @@ body {
   background-color: var(--yellow);
 }
 
-.stats-container {
-  width: 100%;
-  padding: var(--site-pad) 16px;
-  box-shadow: 0px 0px 48px rgba(105, 104, 143, 0.25);
-  border-radius: 24px;
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 32px;
-  margin: 24px auto 80px auto;
-  box-sizing: border-box;
-}
 
-.stat-group {
-  flex: 1;
-  text-align: center;
-}
-
-.stat {
-  font-size: 24px;
-  padding-bottom: 16px;
-  font-weight: bold;
-  color: var(--smoke);
-}
-
-.stat-text {
-  font-size: 16px;
-  color: var(--smoke);
-}
-
-.divider {
-  width: 2px;
-  background: #D5D5DD;
-  height: 100px;
-}
 
 /* Responsive Dividers */
 @media (max-width: 700px) {
