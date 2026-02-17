@@ -69,7 +69,7 @@
 </div>
 
 <div class="container cs-container">
-  <a href="#" class="cs locked-cs" data-target="nyli.html">
+<a class="cs locked-cs" data-target="nyli.html">
     <div class="cs-image">
       <img src="images/nyli/NYLIThumbnail.webp" alt="NYLI Thumbnail" />
     </div>
@@ -211,11 +211,33 @@ document.querySelectorAll(".locked-cs").forEach(card => {
   const error = card.querySelector(".password-error");
   const target = card.dataset.target;
 
-  card.addEventListener("click", e => {
-    e.preventDefault();
-    card.classList.add("show-password");
-    input.focus();
+button.addEventListener("click", () => {
+  const entered = input.value.trim();
+
+  if (entered === "ferreira2026nyli") {  
+    window.location.href = card.dataset.target;
+  } else {
+    input.value = "";
+    input.placeholder = "Incorrect password";
+    input.classList.add("error");
+  }
+});
+
+
+card.addEventListener("click", e => {
+  e.preventDefault();   
+  e.stopPropagation(); 
+  card.classList.add("show-password");
+  input.focus();
+});
+
+
+document.querySelectorAll('.cs-password-modal').forEach(modal => {
+  modal.addEventListener('click', function (e) {
+    e.stopPropagation(); 
   });
+});
+
 
   overlay.addEventListener("click", e => e.stopPropagation());
 
