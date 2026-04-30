@@ -74,7 +74,7 @@
   <div class="container">
     <h2>Live Application</h2>
     <p class="p picklet-live-intro">
-      If both frames show Picklet below, iframe embedding from your domain is working.
+      On a large screen, use the tabs to switch between desktop and mobile previews. On a phone, you see the mobile layout full width.
     </p>
   </div>
   <div class="picklet-live-breakout">
@@ -84,27 +84,35 @@
           Full screen preview
         </button>
       </div>
-      <div class="picklet-live-dual">
-        <div class="picklet-live-desktop">
-          <h4>Desktop</h4>
-          <div class="picklet-live-frame picklet-live-frame--desktop">
-            <iframe
-              src="https://picklet.marcusferreira.com"
-              title="Picklet live app — desktop"
-              loading="lazy"
-              allowfullscreen>
-            </iframe>
-          </div>
+      <div class="picklet-live-body">
+        <div class="picklet-live-tabs" role="tablist" aria-label="Picklet preview size">
+          <button type="button" class="picklet-live-tab is-active" role="tab" id="picklet-tab-desktop" data-tab="desktop" aria-selected="true" aria-controls="picklet-panel-desktop">
+            Desktop
+          </button>
+          <button type="button" class="picklet-live-tab" role="tab" id="picklet-tab-mobile" data-tab="mobile" aria-selected="false" aria-controls="picklet-panel-mobile" tabindex="-1">
+            Mobile
+          </button>
         </div>
-        <div class="picklet-live-mobile">
-          <h4>Mobile</h4>
-          <div class="picklet-phone-shell">
-            <iframe
-              src="https://picklet.marcusferreira.com"
-              title="Picklet live app — mobile"
-              loading="lazy"
-              allowfullscreen>
-            </iframe>
+        <div class="picklet-live-panels">
+          <div class="picklet-live-panel picklet-live-panel--desktop is-active" role="tabpanel" id="picklet-panel-desktop" aria-labelledby="picklet-tab-desktop" data-panel="desktop">
+            <div class="picklet-live-frame picklet-live-frame--desktop">
+              <iframe
+                src="https://picklet.marcusferreira.com"
+                title="Picklet live app — desktop"
+                loading="lazy"
+                allowfullscreen>
+              </iframe>
+            </div>
+          </div>
+          <div class="picklet-live-panel picklet-live-panel--mobile" role="tabpanel" id="picklet-panel-mobile" aria-labelledby="picklet-tab-mobile" data-panel="mobile" hidden>
+            <div class="picklet-phone-shell">
+              <iframe
+                src="https://picklet.marcusferreira.com"
+                title="Picklet live app — mobile"
+                loading="lazy"
+                allowfullscreen>
+              </iframe>
+            </div>
           </div>
         </div>
       </div>
@@ -186,6 +194,45 @@ document.addEventListener('DOMContentLoaded', () => {
       el.classList.add('show');
     });
   });
+
+  (function initPickletLiveTabs() {
+    const mq = window.matchMedia('(min-width: 769px)');
+    const tabs = document.querySelectorAll('.picklet-live-tab');
+    const panels = document.querySelectorAll('.picklet-live-panel');
+    if (!tabs.length || !panels.length) return;
+
+    const activate = (name) => {
+      tabs.forEach((tab) => {
+        const on = tab.dataset.tab === name;
+        tab.classList.toggle('is-active', on);
+        tab.setAttribute('aria-selected', on ? 'true' : 'false');
+        tab.tabIndex = on ? 0 : -1;
+      });
+      panels.forEach((panel) => {
+        const on = panel.dataset.panel === name;
+        panel.classList.toggle('is-active', on);
+        panel.toggleAttribute('hidden', !on);
+      });
+    };
+
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        if (!mq.matches) return;
+        activate(tab.dataset.tab);
+      });
+    });
+
+    const onMq = () => {
+      if (mq.matches) {
+        const current = document.querySelector('.picklet-live-tab.is-active')?.dataset.tab || 'desktop';
+        activate(current);
+      } else {
+        panels.forEach((p) => p.removeAttribute('hidden'));
+      }
+    };
+    mq.addEventListener('change', onMq);
+    onMq();
+  })();
 
   const pickletStage = document.getElementById('picklet-live-stage');
   const pickletFsBtn = document.getElementById('pickletFullscreenBtn');

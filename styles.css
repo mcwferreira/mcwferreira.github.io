@@ -181,7 +181,7 @@ ul.p3 li::marker {
 .prototype-embed { position: relative; width: auto; height: 100vh; aspect-ratio: 16/9; max-width: 100%; margin: 48px 0; }
 .prototype-embed iframe { width: 100%; height: 100%; border: 0; display: block; }
 
-/* Picklet case study: desktop + mobile live embeds */
+/* Picklet case study: tabs on large screens, mobile-only on phones */
 .picklet-live-section .picklet-live-intro {
   margin-bottom: 0;
 }
@@ -194,24 +194,47 @@ ul.p3 li::marker {
 .picklet-live-stage {
   width: 100%;
 }
-.picklet-live-dual {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  gap: 32px;
+.picklet-live-body {
+  max-width: var(--container);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 120px;
+  padding-right: 120px;
+  box-sizing: border-box;
+  width: 100%;
 }
-.picklet-live-desktop {
-  flex: 1 1 480px;
-  min-width: 0;
+.picklet-live-tabs {
+  display: none;
+  width: 100%;
+  gap: 0;
+  border-bottom: 1px solid var(--gray1);
+  margin-bottom: 20px;
+  box-sizing: border-box;
 }
-.picklet-live-desktop h4,
-.picklet-live-mobile h4 {
-  margin: 0 0 12px 0;
+.picklet-live-tab {
+  flex: 0 0 auto;
+  padding: 12px 20px;
+  font: inherit;
   font-size: 14px;
   font-weight: 600;
   letter-spacing: 0.02em;
   text-transform: uppercase;
+  border: none;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -1px;
+  background: transparent;
   color: var(--gray3);
+  cursor: pointer;
+}
+.picklet-live-tab:hover {
+  color: var(--black);
+}
+.picklet-live-tab.is-active {
+  color: var(--black);
+  border-bottom-color: var(--gold);
+}
+.picklet-live-panels {
+  width: 100%;
 }
 .picklet-live-frame--desktop {
   width: 100%;
@@ -227,15 +250,12 @@ ul.p3 li::marker {
   border: 0;
   display: block;
 }
-.picklet-live-mobile {
-  flex: 0 0 400px;
-}
 .picklet-phone-shell {
   width: 400px;
   max-width: 100%;
   height: 560px;
   padding: 14px;
-  margin: 0;
+  margin: 0 auto;
   border: 1px solid #1a1a1a;
   border-radius: 36px;
   background: #111;
@@ -250,6 +270,17 @@ ul.p3 li::marker {
   background: #fff;
   display: block;
 }
+@media (min-width: 769px) {
+  .picklet-live-tabs {
+    display: flex;
+  }
+  .picklet-live-panel:not(.is-active) {
+    display: none;
+  }
+  .picklet-live-panel.is-active {
+    display: block;
+  }
+}
 .picklet-live-stage:fullscreen {
   background: var(--bg);
   padding: 16px 0 24px;
@@ -263,9 +294,11 @@ ul.p3 li::marker {
   max-width: var(--container);
   margin: 0 auto;
 }
-.picklet-live-stage:fullscreen .picklet-live-dual {
+.picklet-live-stage:fullscreen .picklet-live-body {
   max-width: var(--container);
   margin: 0 auto;
+  padding-left: 24px;
+  padding-right: 24px;
 }
 
 .cs-image,
@@ -709,6 +742,10 @@ ul.p3 li::marker {
 
 @media (max-width: 1000px) {
   .container, .hero-container .inner, .nav-inner { padding-left: 60px; padding-right: 60px; }
+  .picklet-live-body {
+    padding-left: 60px;
+    padding-right: 60px;
+  }
 }
 @media (max-width: 768px) {
   .nav-links {
@@ -784,6 +821,15 @@ ul.p3 li::marker {
     margin-right: calc(50% - 50vw);
     box-sizing: border-box;
   }
+  .picklet-live-body {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+  .picklet-live-tabs {
+    display: none !important;
+  }
   .picklet-live-toolbar {
     display: flex;
     justify-content: flex-end;
@@ -791,20 +837,11 @@ ul.p3 li::marker {
     padding: 0 16px 12px;
     box-sizing: border-box;
   }
-  .picklet-live-dual {
-    flex-direction: column;
-    gap: 0;
-    width: 100%;
+  .picklet-live-panel--desktop {
+    display: none !important;
   }
-  .picklet-live-desktop,
-  .picklet-live-mobile {
-    flex: 1 1 auto;
-    width: 100%;
-  }
-  .picklet-live-desktop h4,
-  .picklet-live-mobile h4 {
-    padding: 0 16px;
-    margin-bottom: 8px;
+  .picklet-live-panel--mobile {
+    display: block !important;
   }
   .picklet-live-frame--desktop {
     border-radius: 0;
@@ -825,7 +862,6 @@ ul.p3 li::marker {
     padding: 0;
     border-radius: 0;
     border: 0;
-    border-top: 1px solid var(--lsmoke);
     background: #fff;
     box-shadow: none;
   }
