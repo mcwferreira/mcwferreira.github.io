@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Picklet Case Study</title>
+  <link rel="stylesheet" href="styles.css" />
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-B6T3E7G06M"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-B6T3E7G06M');
+  </script>
+</head>
+
+<body>
+<div id="nav"></div>
+
+<header class="hero-container" data-bg="images/picklet/picklet-cover.png">
+  <div class="inner">
+    <h1 class="hero-h1">
+      Building a recipe-to-grocery app from a real dinner-time problem
+    </h1>
+  </div>
+</header>
+
+<div class="container hero-info">
+  <div class="title-col">
+    <h2>Overview</h2>
+  </div>
+  <div class="body-col">
+    <p class="p2 bold">
+      Picklet is a personal app concept focused on making meal planning easier by turning
+      recipes into practical grocery lists.
+    </p>
+
+    <div class="three-col-list">
+      <div>
+        <h4>Role</h4>
+        <p>Product design</p>
+        <p>UI design</p>
+      </div>
+      <div>
+        <h4>Type</h4>
+        <p>Personal project</p>
+      </div>
+      <div>
+        <h4>Timeline</h4>
+        <p>A few weeks</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="section-container">
+  <div class="container">
+    <h2>How it started</h2>
+    <p class="p">
+      I was planning dinner one night, and then needed to create a grocery list. I thought it
+      would be nice to just paste the recipe into an app and have it give me a grocery list,
+      so I downloaded a few apps to try out and was not too satisfied with any of them.
+    </p>
+    <p class="p">
+      So I decided to make my own app. A few weeks later I could not even remember what we
+      had for dinner that night, but now I had my own personal app to plan meals in the future.
+      I used Cursor, Claude AI, and Figma to design and build it.
+    </p>
+  </div>
+</section>
+
+<section class="section-container" id="live-application">
+  <div class="container">
+    <h2>Live Application</h2>
+    <p class="p">
+      If both frames show Picklet below, iframe embedding from your domain is working.
+    </p>
+    <div class="picklet-live-dual">
+      <div class="picklet-live-desktop">
+        <h4>Desktop</h4>
+        <div class="picklet-live-frame picklet-live-frame--desktop">
+          <iframe
+            src="https://picklet.marcusferreira.com"
+            title="Picklet live app — desktop"
+            loading="lazy"
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+      <div class="picklet-live-mobile">
+        <h4>Mobile</h4>
+        <div class="picklet-phone-shell">
+          <iframe
+            src="https://picklet.marcusferreira.com"
+            title="Picklet live app — mobile"
+            loading="lazy"
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="footer"></div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  let lastScrollY = window.scrollY;
+
+  fetch('nav.html')
+    .then(res => res.text())
+    .then(html => {
+      const navMount = document.getElementById('nav');
+      if (!navMount) return;
+
+      navMount.innerHTML = html;
+
+      const topNav =
+        document.getElementById('topNav') ||
+        document.querySelector('.top-nav') ||
+        navMount.querySelector('nav');
+
+      const hamburger = document.getElementById('hamburger');
+      const navLinks = document.getElementById('navLinks');
+
+      if (hamburger && navLinks) {
+        hamburger.addEventListener('click', () => {
+          navLinks.classList.toggle('show');
+        });
+      }
+
+      if (!topNav) return;
+
+      window.addEventListener('scroll', () => {
+        const currentScrollY = window.scrollY;
+
+        if (currentScrollY > lastScrollY && currentScrollY > 80) {
+          topNav.classList.add('nav-hidden');
+        } else {
+          topNav.classList.remove('nav-hidden');
+        }
+
+        lastScrollY = currentScrollY;
+      });
+    });
+
+  fetch('footer.html')
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById('footer').innerHTML = html;
+
+      const copyBtn = document.querySelector('.copy-email');
+      if (copyBtn) {
+        copyBtn.addEventListener('click', () => {
+          navigator.clipboard.writeText(copyBtn.dataset.email);
+          copyBtn.textContent = 'Copied!';
+          setTimeout(() => copyBtn.textContent = 'Copy email', 1500);
+        });
+      }
+    });
+
+  document.querySelectorAll('.hero-container').forEach(hero => {
+    const bg = hero.getAttribute('data-bg');
+    if (!bg) return;
+    const img = new Image();
+    img.src = bg;
+    img.onload = () => {
+      hero.style.backgroundImage = `url(${bg})`;
+      hero.classList.add('bg-loaded');
+    };
+  });
+
+  requestAnimationFrame(() => {
+    document.querySelectorAll('.hero-h1, .button-hero').forEach(el => {
+      el.classList.add('show');
+    });
+  });
+});
+</script>
+</body>
+</html>
