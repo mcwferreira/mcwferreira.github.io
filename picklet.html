@@ -70,33 +70,42 @@
   </div>
 </section>
 
-<section class="section-container" id="live-application">
+<section class="section-container picklet-live-section" id="live-application">
   <div class="container">
     <h2>Live Application</h2>
-    <p class="p">
+    <p class="p picklet-live-intro">
       If both frames show Picklet below, iframe embedding from your domain is working.
     </p>
-    <div class="picklet-live-dual">
-      <div class="picklet-live-desktop">
-        <h4>Desktop</h4>
-        <div class="picklet-live-frame picklet-live-frame--desktop">
-          <iframe
-            src="https://picklet.marcusferreira.com"
-            title="Picklet live app — desktop"
-            loading="lazy"
-            allowfullscreen>
-          </iframe>
-        </div>
+  </div>
+  <div class="picklet-live-breakout">
+    <div id="picklet-live-stage" class="picklet-live-stage">
+      <div class="picklet-live-toolbar">
+        <button type="button" class="picklet-fullscreen-btn button" id="pickletFullscreenBtn" aria-pressed="false">
+          Full screen preview
+        </button>
       </div>
-      <div class="picklet-live-mobile">
-        <h4>Mobile</h4>
-        <div class="picklet-phone-shell">
-          <iframe
-            src="https://picklet.marcusferreira.com"
-            title="Picklet live app — mobile"
-            loading="lazy"
-            allowfullscreen>
-          </iframe>
+      <div class="picklet-live-dual">
+        <div class="picklet-live-desktop">
+          <h4>Desktop</h4>
+          <div class="picklet-live-frame picklet-live-frame--desktop">
+            <iframe
+              src="https://picklet.marcusferreira.com"
+              title="Picklet live app — desktop"
+              loading="lazy"
+              allowfullscreen>
+            </iframe>
+          </div>
+        </div>
+        <div class="picklet-live-mobile">
+          <h4>Mobile</h4>
+          <div class="picklet-phone-shell">
+            <iframe
+              src="https://picklet.marcusferreira.com"
+              title="Picklet live app — mobile"
+              loading="lazy"
+              allowfullscreen>
+            </iframe>
+          </div>
         </div>
       </div>
     </div>
@@ -177,6 +186,26 @@ document.addEventListener('DOMContentLoaded', () => {
       el.classList.add('show');
     });
   });
+
+  const pickletStage = document.getElementById('picklet-live-stage');
+  const pickletFsBtn = document.getElementById('pickletFullscreenBtn');
+  if (pickletStage && pickletFsBtn && pickletStage.requestFullscreen) {
+    const setFsLabel = () => {
+      const on = document.fullscreenElement === pickletStage;
+      pickletFsBtn.textContent = on ? 'Exit full screen' : 'Full screen preview';
+      pickletFsBtn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    };
+    pickletFsBtn.addEventListener('click', () => {
+      if (document.fullscreenElement === pickletStage) {
+        document.exitFullscreen().catch(() => {});
+      } else {
+        pickletStage.requestFullscreen().catch(() => {});
+      }
+    });
+    document.addEventListener('fullscreenchange', setFsLabel);
+  } else if (pickletFsBtn) {
+    pickletFsBtn.hidden = true;
+  }
 });
 </script>
 </body>
