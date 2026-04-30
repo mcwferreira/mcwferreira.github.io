@@ -74,7 +74,7 @@
   <div class="container">
     <h2>Live Application</h2>
     <p class="p picklet-live-intro">
-      On a large screen, use the tabs to switch between desktop and mobile previews. On a phone, you see the mobile layout full width.
+      On a large screen, use the tabs to switch between desktop and mobile previews. On phones and tablets, only the mobile-width preview is shown, full width.
     </p>
   </div>
   <div class="picklet-live-breakout">
@@ -196,10 +196,23 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   (function initPickletLiveTabs() {
-    const mq = window.matchMedia('(min-width: 769px)');
+    const mqWide = window.matchMedia('(min-width: 1025px)');
+    const PICKLET_APP_URL = 'https://picklet.marcusferreira.com';
     const tabs = document.querySelectorAll('.picklet-live-tab');
     const panels = document.querySelectorAll('.picklet-live-panel');
+    const desktopIframe = document.querySelector('.picklet-live-panel--desktop iframe');
+    const mobileIframe = document.querySelector('.picklet-live-panel--mobile iframe');
     if (!tabs.length || !panels.length) return;
+
+    const setIframeSrc = (iframe, url) => {
+      if (!iframe) return;
+      if (url) {
+        if (iframe.src !== url) iframe.src = url;
+      } else {
+        iframe.removeAttribute('src');
+        iframe.src = 'about:blank';
+      }
+    };
 
     const activate = (name) => {
       tabs.forEach((tab) => {
@@ -217,21 +230,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
     tabs.forEach((tab) => {
       tab.addEventListener('click', () => {
-        if (!mq.matches) return;
+        if (!mqWide.matches) return;
         activate(tab.dataset.tab);
+        setIframeSrc(desktopIframe, PICKLET_APP_URL);
+        setIframeSrc(mobileIframe, PICKLET_APP_URL);
       });
     });
 
-    const onMq = () => {
-      if (mq.matches) {
+    const syncLayoutForViewport = () => {
+      if (mqWide.matches) {
         const current = document.querySelector('.picklet-live-tab.is-active')?.dataset.tab || 'desktop';
         activate(current);
+        setIframeSrc(desktopIframe, PICKLET_APP_URL);
+        setIframeSrc(mobileIframe, PICKLET_APP_URL);
       } else {
         panels.forEach((p) => p.removeAttribute('hidden'));
+        document.querySelector('.picklet-live-panel--mobile')?.classList.add('is-active');
+        document.querySelector('.picklet-live-panel--desktop')?.classList.remove('is-active');
+        setIframeSrc(desktopIframe, null);
+        setIframeSrc(mobileIframe, PICKLET_APP_URL);
       }
     };
-    mq.addEventListener('change', onMq);
-    onMq();
+
+    mqWide.addEventListener('change', syncLayoutForViewport);
+    syncLayoutForViewport();
   })();
 
   const pickletStage = document.getElementById('picklet-live-stage');
