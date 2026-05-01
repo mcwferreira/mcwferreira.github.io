@@ -625,8 +625,12 @@ ul.p3 li::marker {
 }
 
 .cs-container .cs-image img {
-  display: block; 
-  margin-bottom: 12px; 
+  display: block;
+  margin-bottom: 12px;
+  width: 100%;
+  height: auto;
+  max-height: clamp(240px, 30vw, 360px);
+  object-fit: contain;
 }
 
 .cs-container .cs-image p.p4 {
