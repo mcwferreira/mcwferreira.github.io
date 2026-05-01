@@ -23,6 +23,11 @@
     <h1 class="hero-h1">
       Building a recipe-to-grocery app from a real dinner-time problem
     </h1>
+    <div class="button-wrapper">
+      <a href="https://picklet.marcusferreira.com" class="button-hero" target="_blank" rel="noopener noreferrer">
+        See Live Product
+      </a>
+    </div>
   </div>
 </header>
 
@@ -81,7 +86,7 @@
     <div id="picklet-live-stage" class="picklet-live-stage">
       <div class="picklet-live-toolbar">
         <button type="button" class="picklet-fullscreen-btn button" id="pickletFullscreenBtn" aria-pressed="false">
-          Full screen preview
+          Full screen
         </button>
       </div>
       <div class="picklet-live-body">
@@ -261,7 +266,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (pickletStage && pickletFsBtn && pickletStage.requestFullscreen) {
     const setFsLabel = () => {
       const on = document.fullscreenElement === pickletStage;
-      pickletFsBtn.textContent = on ? 'Exit full screen' : 'Full screen preview';
+      pickletFsBtn.textContent = on ? 'Exit full screen' : 'Full screen';
       pickletFsBtn.setAttribute('aria-pressed', on ? 'true' : 'false');
     };
     pickletFsBtn.addEventListener('click', () => {
